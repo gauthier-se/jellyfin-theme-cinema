@@ -5,8 +5,9 @@
 
 html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
     background:
-        radial-gradient(55vw 55vh at 18% 12%, rgb(170 92 195 / 16%), transparent 70%),
-        radial-gradient(55vw 55vh at 85% 92%, rgb(0 164 220 / 14%), transparent 70%), var(--cn-bg);
+        radial-gradient(55vw 55vh at 18% 12%, rgb(var(--cn-accent-2-rgb) / 16%), transparent 70%),
+        radial-gradient(55vw 55vh at 85% 92%, rgb(var(--cn-accent-rgb) / 14%), transparent 70%),
+        var(--cn-bg);
 }
 
 #loginPage {
@@ -77,24 +78,13 @@ html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
         color: var(--cn-text-2);
     }
 
-    /* One white action, like a TV sign-in */
+    /* The primary action (controls.css), with the corners of the fields above */
     .button-submit {
         height: 3rem;
         margin: 0;
         padding: 0;
         border-radius: var(--cn-radius-control);
-        background: #fff;
-        color: #000;
         font-size: 1rem;
-        font-weight: 700;
-        filter: none;
-
-        &:hover,
-        &:focus {
-            background: rgb(255 255 255 / 85%);
-            color: #000;
-            filter: none;
-        }
     }
 
     /* Quick Connect and the rest: quiet links on one line under a hairline */

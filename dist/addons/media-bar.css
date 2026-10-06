@@ -162,7 +162,13 @@ html:not(.layout-tv) #slides-container :is(.play-button, .detail-button, .favori
 }
 
 html:not(.layout-tv) #slides-container .play-button {
-  padding: 0 1.6rem 0 1.25rem;
+  background: var(--cn-primary);
+  color: var(--cn-on-primary);
+  padding: 0 1.6rem 0 1.25rem !important;
+}
+
+html:not(.layout-tv) #slides-container .play-button:hover {
+  background: var(--cn-primary-hover);
 }
 
 html:not(.layout-tv) #slides-container .detail-button {
@@ -173,7 +179,7 @@ html:not(.layout-tv) #slides-container .detail-button {
   flex-direction: row;
   gap: .45rem;
   width: auto;
-  padding: 0 1.4rem 0 1.1rem;
+  padding: 0 1.4rem 0 1.1rem !important;
 }
 
 html:not(.layout-tv) #slides-container .detail-button:hover {
@@ -185,19 +191,19 @@ html:not(.layout-tv) #slides-container .detail-button .action-label {
 }
 
 html:not(.layout-tv) #slides-container .favorite-button {
+  background: var(--cn-button);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  background: #ffffff24;
   border: 0;
   width: 2.9rem;
 }
 
 html:not(.layout-tv) #slides-container .favorite-button:hover {
-  background: #ffffff3d;
+  background: var(--cn-button-hover);
 }
 
 html:not(.layout-tv) #slides-container .favorite-button.favorited {
-  color: #aa5cc3;
+  color: var(--cn-accent-2);
 }
 
 html:not(.layout-tv) #slides-container .dot {
@@ -217,9 +223,9 @@ html:not(.layout-tv) #slides-container .ss-chrome i {
 }
 
 html:not(.layout-tv) #slides-container .arrow {
+  background: var(--cn-button);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  background: #ffffff24;
 }
 
 @media (hover: hover) and (pointer: fine) {

@@ -75,10 +75,17 @@ Every colour, radius and size is a `--cn-*` variable, listed with comments in
 
 ```css
 :root {
-  /* A red accent, Netflix style */
+  /* A red accent, Netflix style, for favourites too */
   --cn-accent: #e50914;
   --cn-accent-rgb: 229 9 20;
+  --cn-accent-2: #e50914;
+  --cn-accent-2-rgb: 229 9 20;
   --cn-gradient: linear-gradient(90deg, #b20710, #e50914);
+
+  /* Primary actions (Play, Sign In, Save) in the accent, not white */
+  --cn-primary: #e50914;
+  --cn-primary-hover: #b20710;
+  --cn-on-primary: #fff;
 
   /* A darker canvas */
   --cn-bg: #0b0b0d;

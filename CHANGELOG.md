@@ -8,6 +8,44 @@ a patch for fixes.
 
 ## [Unreleased]
 
+### Added
+
+- A white focus ring for the keyboard on buttons, cards and home tiles, which showed no focus at
+  all.
+- Tokens for the primary action (`--cn-primary`, `--cn-primary-hover`, `--cn-on-primary`), the
+  round glass buttons (`--cn-button`, `--cn-button-hover`), the play disc (`--cn-disc`,
+  `--cn-disc-rim`) and the logo's purple (`--cn-accent-2`, `--cn-accent-2-rgb`).
+- The now playing bar is frosted like the drawer, with the title in the text colour.
+- Episode and track thumbnails round like cards, with the cards' play disc.
+
+### Changed
+
+- Every form action (Save, Add, Add Image) is the white pill of Play and Sign In, instead of the
+  purple to blue gradient.
+- Watched checks take the accent and favourite hearts the purple, instead of Jellyfin's red. The
+  Media Bar heart follows `--cn-accent-2`.
+- The logo and the library titles sit on the page gutter, in line with the cards. So do the
+  Cinematheque page and title.
+- The sign-in glows follow `--cn-accent` and `--cn-accent-2`.
+
+### Fixed
+
+- Action sheets (card menus, the player's settings) had square corners: Jellyfin sets their radius
+  with `!important`.
+- Sliders (seek, volume, the now playing bar) stayed Jellyfin blue when `--cn-accent` changed.
+- Touch screens kept the hover state after a tap on the top bar's buttons and the item page's
+  buttons.
+- The play button on cards in the touch layouts lost its disc and vanished on light artwork.
+- The audio and subtitle pickers on item pages set their text against the edge.
+- Hovering the current library in the top bar faded its highlight.
+- Media Bar: the Play and Details pills kept Jellyfin's padding instead of their own.
+- Jellyfin Enhanced: its drawer entries sat out of line with the others, their margin and corners
+  overridden by Jellyfin.
+
+### Removed
+
+- `--cn-gradient-strong`, which only the form actions used.
+
 ## [0.1.0] - 2026-10-06
 
 First release, for Jellyfin 12.1 and its modern layout.

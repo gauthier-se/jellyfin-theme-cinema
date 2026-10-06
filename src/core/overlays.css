@@ -16,6 +16,11 @@
     box-shadow: 0 20px 50px rgb(0 0 0 / 50%);
 }
 
+/* Jellyfin squares action sheets with !important, in every page bundle */
+.actionSheet:not(.actionsheet-fullscreen) {
+    border-radius: var(--cn-radius-lg) !important;
+}
+
 /* Items sit inside the panel's padding with a smaller, concentric radius */
 body:not(.dashboardDocument) .MuiMenu-list {
     padding: 6px;
@@ -58,6 +63,29 @@ body:not(.dashboardDocument) .MuiTooltip-tooltip {
 .dialog:not(.dialog-fullscreen) {
     border-radius: var(--cn-radius-lg);
     background-image: none;
+}
+
+/* Now playing (music): the bar at the foot of every page, frosted like the
+   drawer rather than a solid slab, with the title in the text colour. The
+   html prefix outranks Jellyfin's theme stylesheet. */
+html body:not(.dashboardDocument) .appfooter {
+    background-color: var(--cn-glass);
+    backdrop-filter: var(--cn-blur);
+
+    /* The footer stays in place, empty, when nothing plays: the edge goes on
+       the bar */
+    .nowPlayingBar {
+        border-top: 1px solid var(--cn-line);
+    }
+
+    .nowPlayingBarText > :first-child {
+        font-weight: 600;
+        color: var(--cn-text);
+    }
+
+    .nowPlayingBarSecondaryText {
+        color: var(--cn-text-3);
+    }
 }
 
 .toast {

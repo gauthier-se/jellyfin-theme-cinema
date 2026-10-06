@@ -16,12 +16,12 @@ body:not(.dashboardDocument) .MuiDrawer-paper .jellyfinEnhancedSection .sidebarH
 }
 
 body:not(.dashboardDocument) .MuiDrawer-paper .jellyfinEnhancedSection .navMenuOption {
-  border-radius: var(--cn-radius-control);
   color: var(--cn-text);
   align-items: center;
-  margin: 1px 8px;
   font-size: 1rem;
   display: flex;
+  border-radius: var(--cn-radius-control) !important;
+  margin: 1px 8px !important;
   padding: 8px 16px !important;
 }
 

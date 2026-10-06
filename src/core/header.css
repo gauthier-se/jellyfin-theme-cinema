@@ -65,14 +65,22 @@
     }
 
     .MuiAvatar-root {
-        background: rgb(255 255 255 / 14%);
+        background: var(--cn-button);
         color: var(--cn-text);
     }
 
     /* Second row on library pages: title, count, then the actions */
-    > .MuiToolbar-root + .MuiToolbar-root .MuiTypography-h2 {
-        font-weight: 700;
-        letter-spacing: -0.01em;
+    > .MuiToolbar-root + .MuiToolbar-root {
+        .MuiTypography-h2 {
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        /* The title is a text button; its padding (MUI's 11px) would set it
+           off the gutter the cards start on */
+        > .MuiButton-text:first-child {
+            margin-inline-start: -11px;
+        }
     }
 
     .MuiButtonGroup-root {
@@ -91,12 +99,12 @@
     /* Every primary action in the bars (Play All, New Collection, New
        Playlist) is the same white pill */
     .MuiButton-contained:not(.Mui-disabled) {
-        background: #fff;
-        color: #000;
+        background: var(--cn-primary);
+        color: var(--cn-on-primary);
         box-shadow: none;
 
         &:hover {
-            background: rgb(255 255 255 / 85%);
+            background: var(--cn-primary-hover);
             box-shadow: none;
         }
     }
@@ -113,18 +121,17 @@
     }
 
     > .MuiStack-root {
-        /* Server name, like a wordmark: no hover slab, it dims */
+        /* Server name, like a wordmark: no hover slab, it dims. The logo sits
+           on the page gutter: MUI pads the button 11px and pulls the icon
+           back 4px. */
         > a:first-child {
+            margin-inline-start: -7px;
             font-size: 1.05rem;
             font-weight: 700;
             letter-spacing: -0.01em;
             color: var(--cn-text);
             background: transparent;
             transition: opacity 0.2s;
-
-            &:hover {
-                opacity: 0.75;
-            }
 
             .MuiTouchRipple-root {
                 display: none;
@@ -146,11 +153,6 @@
             .MuiButton-startIcon {
                 display: none;
             }
-
-            &:hover {
-                color: var(--cn-text);
-                background-color: var(--cn-hover);
-            }
         }
 
         /* The current library */
@@ -162,11 +164,6 @@
 
     .MuiIconButton-root {
         color: var(--cn-text-2);
-
-        &:hover {
-            color: var(--cn-text);
-            background-color: var(--cn-hover);
-        }
     }
 
     /* Medium screens: centre the libraries in the room left between the ends */
@@ -208,6 +205,24 @@
                 position: absolute;
                 left: var(--cn-gutter);
             }
+        }
+    }
+}
+
+/*
+ * Hover, for pointers only: a touch screen keeps the hover state after a tap,
+ * which MUI guards against for its own. The current library keeps its wash.
+ */
+@media (hover: hover) {
+    .MuiAppBar-root > .MuiToolbar-root:first-child {
+        > .MuiStack-root > a:first-child:hover {
+            opacity: 0.75;
+        }
+
+        > .MuiStack-root > :not(:first-child, .MuiButton-colorPrimary):hover,
+        .MuiIconButton-root:hover {
+            color: var(--cn-text);
+            background-color: var(--cn-hover);
         }
     }
 }

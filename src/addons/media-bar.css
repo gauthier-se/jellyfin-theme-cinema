@@ -196,15 +196,22 @@ html:not(.layout-tv) #slides-container {
         font-weight: 700;
     }
 
+    /* Both are also .detailButton, which Jellyfin pads with !important */
     .play-button {
-        padding: 0 1.6rem 0 1.25rem;
+        padding: 0 1.6rem 0 1.25rem !important;
+        background: var(--cn-primary);
+        color: var(--cn-on-primary);
+
+        &:hover {
+            background: var(--cn-primary-hover);
+        }
     }
 
     .detail-button {
         flex-direction: row;
         gap: 0.45rem;
         width: auto;
-        padding: 0 1.4rem 0 1.1rem;
+        padding: 0 1.4rem 0 1.1rem !important;
         border: 0;
         background: rgb(109 109 110 / 62%);
         backdrop-filter: blur(12px);
@@ -221,15 +228,15 @@ html:not(.layout-tv) #slides-container {
     .favorite-button {
         width: 2.9rem;
         border: 0;
-        background: rgb(255 255 255 / 14%);
+        background: var(--cn-button);
         backdrop-filter: blur(12px);
 
         &:hover {
-            background: rgb(255 255 255 / 24%);
+            background: var(--cn-button-hover);
         }
 
         &.favorited {
-            color: #aa5cc3;
+            color: var(--cn-accent-2);
         }
     }
 
@@ -251,7 +258,7 @@ html:not(.layout-tv) #slides-container {
     }
 
     .arrow {
-        background: rgb(255 255 255 / 14%);
+        background: var(--cn-button);
         backdrop-filter: blur(12px);
     }
 

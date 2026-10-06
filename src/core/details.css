@@ -132,17 +132,11 @@ html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContai
         height: 2.9em;
         padding: 0 !important;
         border-radius: 50%;
-        background: rgb(255 255 255 / 12%);
+        background: var(--cn-button);
         color: var(--cn-text);
         transition:
             background-color 0.2s,
             transform 0.2s var(--cn-ease);
-
-        &:hover {
-            background: rgb(255 255 255 / 22%);
-            color: var(--cn-text);
-            transform: scale(1.06);
-        }
     }
 
     .detailButton-icon {
@@ -153,12 +147,21 @@ html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContai
         width: auto;
         padding: 0 1.5em !important;
         border-radius: var(--cn-pill);
-        background: #fff;
-        color: #000;
+        background: var(--cn-primary);
+        color: var(--cn-on-primary);
+    }
 
-        &:hover {
-            background: rgb(255 255 255 / 85%);
-            color: #000;
+    /* Pointers only: a tap would leave a touch screen's button lifted */
+    @media (hover: hover) {
+        .detailButton:hover {
+            background: var(--cn-button-hover);
+            color: var(--cn-text);
+            transform: scale(1.06);
+        }
+
+        .btnPlay:hover {
+            background: var(--cn-primary-hover);
+            color: var(--cn-on-primary);
         }
     }
 }

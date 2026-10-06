@@ -15,12 +15,20 @@
   --cn-field-line: #ffffff1a;
   --cn-scrim: #0000008c;
   --cn-track: #ffffff47;
+  --cn-button: #ffffff24;
+  --cn-button-hover: #ffffff3d;
+  --cn-disc: #ffffff2e;
+  --cn-disc-rim: #ffffff59;
+  --cn-primary: #fff;
+  --cn-primary-hover: #ffffffd9;
+  --cn-on-primary: #000;
   --cn-accent: #00a4dc;
   --cn-accent-rgb: 0 164 220;
   --cn-accent-dark: #00729a;
   --cn-accent-light: #33b6e3;
+  --cn-accent-2: #aa5cc3;
+  --cn-accent-2-rgb: 170 92 195;
   --cn-gradient: linear-gradient(90deg, #aa5cc3, #00a4dc);
-  --cn-gradient-strong: linear-gradient(90deg, #9447b0, #007bb0);
   --cn-glass: rgb(var(--cn-bg-rgb) / 82%);
   --cn-menu: #262626eb;
   --cn-raised: #303030eb;
@@ -73,8 +81,8 @@ html:root {
   --jf-palette-divider: var(--cn-line);
   --jf-palette-text-secondary: var(--cn-text-2);
   --jf-palette-FilledInput-bg: #ffffff0f;
-  --jf-palette-Button-inheritContainedBg: #ffffff1a;
-  --jf-palette-Button-inheritContainedHoverBg: #ffffff2e;
+  --jf-palette-Button-inheritContainedBg: var(--cn-button);
+  --jf-palette-Button-inheritContainedHoverBg: var(--cn-button-hover);
   --jf-card-borderRadius: var(--cn-radius);
 }
 
@@ -118,6 +126,16 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backdropContai
 html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundContainer {
   background: var(--cn-bg);
   opacity: 1;
+}
+
+body:not(.dashboardDocument) :is(.emby-button, .paper-icon-button-light, .textActionButton, .MuiButtonBase-root.Mui-focusVisible):focus-visible {
+  outline-offset: 2px;
+  outline: 2px solid var(--cn-text) !important;
+}
+
+.cardScalable:has(.cardContent:focus-visible) {
+  outline: 2px solid var(--cn-text);
+  outline-offset: 2px;
 }
 
 .sectionTitle-cards, .sectionTitle {
@@ -178,13 +196,17 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundCont
 }
 
 .MuiAppBar-root .MuiAvatar-root {
+  background: var(--cn-button);
   color: var(--cn-text);
-  background: #ffffff24;
 }
 
 .MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiTypography-h2 {
   letter-spacing: -.01em;
   font-weight: 700;
+}
+
+.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root > .MuiButton-text:first-child {
+  margin-inline-start: -11px;
 }
 
 .MuiAppBar-root .MuiButtonGroup-root {
@@ -201,14 +223,14 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundCont
 }
 
 .MuiAppBar-root .MuiButton-contained:not(.Mui-disabled) {
-  color: #000;
+  background: var(--cn-primary);
+  color: var(--cn-on-primary);
   box-shadow: none;
-  background: #fff;
 }
 
 .MuiAppBar-root .MuiButton-contained:not(.Mui-disabled):hover {
+  background: var(--cn-primary-hover);
   box-shadow: none;
-  background: #ffffffd9;
 }
 
 .MuiAppBar-root .MuiButtonGroup-contained .MuiButtonGroup-grouped:not(:last-of-type) {
@@ -223,13 +245,10 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundCont
   letter-spacing: -.01em;
   color: var(--cn-text);
   background: none;
+  margin-inline-start: -7px;
   font-size: 1.05rem;
   font-weight: 700;
   transition: opacity .2s;
-}
-
-.MuiAppBar-root > .MuiToolbar-root:first-child > .MuiStack-root > a:first-child:hover {
-  opacity: .75;
 }
 
 .MuiAppBar-root > .MuiToolbar-root:first-child > .MuiStack-root > a:first-child .MuiTouchRipple-root {
@@ -250,11 +269,6 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundCont
   display: none;
 }
 
-.MuiAppBar-root > .MuiToolbar-root:first-child > .MuiStack-root > :not(:first-child):hover {
-  color: var(--cn-text);
-  background-color: var(--cn-hover);
-}
-
 .MuiAppBar-root > .MuiToolbar-root:first-child > .MuiStack-root > .MuiButton-colorPrimary {
   color: var(--cn-text);
   background-color: var(--cn-selected);
@@ -262,11 +276,6 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundCont
 
 .MuiAppBar-root > .MuiToolbar-root:first-child .MuiIconButton-root {
   color: var(--cn-text-2);
-}
-
-.MuiAppBar-root > .MuiToolbar-root:first-child .MuiIconButton-root:hover {
-  color: var(--cn-text);
-  background-color: var(--cn-hover);
 }
 
 @media (min-width: 900px) and (not (min-width: 1200px)) {
@@ -310,6 +319,17 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundCont
   }
 }
 
+@media (hover: hover) {
+  .MuiAppBar-root > .MuiToolbar-root:first-child > .MuiStack-root > a:first-child:hover {
+    opacity: .75;
+  }
+
+  .MuiAppBar-root > .MuiToolbar-root:first-child > .MuiStack-root > :not(:first-child, .MuiButton-colorPrimary):hover, .MuiAppBar-root > .MuiToolbar-root:first-child .MuiIconButton-root:hover {
+    color: var(--cn-text);
+    background-color: var(--cn-hover);
+  }
+}
+
 .MuiChip-root {
   background-color: #ffffff1a;
 }
@@ -322,6 +342,10 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backgroundCont
   border-radius: var(--cn-radius-lg);
   background-image: none;
   box-shadow: 0 20px 50px #00000080;
+}
+
+.actionSheet:not(.actionsheet-fullscreen) {
+  border-radius: var(--cn-radius-lg) !important;
 }
 
 body:not(.dashboardDocument) .MuiMenu-list {
@@ -364,6 +388,25 @@ body:not(.dashboardDocument) .MuiTooltip-tooltip {
 .MuiDialog-paper, .dialog:not(.dialog-fullscreen) {
   border-radius: var(--cn-radius-lg);
   background-image: none;
+}
+
+html body:not(.dashboardDocument) .appfooter {
+  background-color: var(--cn-glass);
+  -webkit-backdrop-filter: var(--cn-blur);
+  backdrop-filter: var(--cn-blur);
+}
+
+html body:not(.dashboardDocument) .appfooter .nowPlayingBar {
+  border-top: 1px solid var(--cn-line);
+}
+
+html body:not(.dashboardDocument) .appfooter .nowPlayingBarText > :first-child {
+  color: var(--cn-text);
+  font-weight: 600;
+}
+
+html body:not(.dashboardDocument) .appfooter .nowPlayingBarSecondaryText {
+  color: var(--cn-text-3);
 }
 
 .toast {
@@ -438,15 +481,14 @@ body:not(.dashboardDocument) .MuiButtonGroup-text > .MuiButtonGroup-grouped {
 }
 
 .button-submit {
-  background: var(--cn-gradient-strong);
-  color: #fff;
+  background: var(--cn-primary);
+  color: var(--cn-on-primary);
   font-weight: 700;
 }
 
 .button-submit:hover, .button-submit:focus {
-  background: var(--cn-gradient-strong);
-  color: #fff;
-  filter: brightness(1.12);
+  background: var(--cn-primary-hover);
+  color: var(--cn-on-primary);
 }
 
 .emby-input, .emby-textarea, .emby-select-withcolor {
@@ -468,8 +510,36 @@ body:not(.dashboardDocument) .MuiButtonGroup-text > .MuiButtonGroup-grouped {
   box-shadow: 0 0 0 100px var(--cn-surface-hover) inset !important;
 }
 
+.trackSelections .selectContainer .detailTrackSelect {
+  padding: .2em 2em .2em .7em;
+}
+
 .checkboxOutline {
   border-radius: 6px;
+}
+
+html .playstatebutton-icon-played {
+  color: var(--cn-accent);
+}
+
+html .ratingbutton-icon-withrating {
+  color: var(--cn-accent-2);
+}
+
+html .mdl-slider {
+  color: var(--cn-accent);
+}
+
+html .mdl-slider::-webkit-slider-thumb {
+  background: var(--cn-accent);
+}
+
+html .mdl-slider::-moz-range-thumb {
+  background: var(--cn-accent);
+}
+
+html .mdl-slider-background-lower:not(.mdl-slider-background-lower-clear), html .sliderMarker.watched {
+  background-color: var(--cn-accent);
 }
 
 .searchFields .searchfields-txtSearch {
@@ -581,20 +651,20 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary {
+  background: var(--cn-disc);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  color: #fff;
-  background: #ffffff2e;
-  justify-content: center;
-  align-items: center;
   width: 2.75rem;
   height: 2.75rem;
+  box-shadow: inset 0 0 0 1px var(--cn-disc-rim);
+  color: #fff;
+  justify-content: center;
+  align-items: center;
   margin-top: -1.375rem;
   margin-left: -1.375rem;
   padding: 0;
   font-size: 1rem;
   display: flex;
-  box-shadow: inset 0 0 0 1px #ffffff59;
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary:hover {
@@ -603,7 +673,7 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   transform: scale(1.08);
 }
 
-.cardOverlayFab-primary .cardOverlayButtonIcon, .cardOverlayButton-br .cardOverlayButtonIcon {
+.cardOverlayFab-primary .cardOverlayButtonIcon, .cardOverlayContainer .cardOverlayButton-br .cardOverlayButtonIcon {
   background: none !important;
 }
 
@@ -612,13 +682,20 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   font-size: 1.5rem !important;
 }
 
-.cardOverlayButton-br .cardOverlayButton {
+.cardOverlayContainer .cardOverlayButton-br .cardOverlayButton {
   padding: .3em;
 }
 
-.cardOverlayButton-br .cardOverlayButtonIcon {
+.cardOverlayContainer .cardOverlayButton-br .cardOverlayButtonIcon {
   color: #ffffffd9;
   font-size: 1.15rem !important;
+}
+
+.cardScalable > .cardOverlayButton-br .cardOverlayButtonIcon {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  background: var(--cn-scrim) !important;
 }
 
 .cardText, .cardTextCentered, .cardTextCentered > .textActionButton {
@@ -698,6 +775,33 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 
 .paperList, .visualCardBox, .collapseContent {
   border-radius: var(--cn-radius);
+}
+
+.listItemImage {
+  border-radius: var(--cn-radius);
+  overflow: hidden;
+}
+
+.listItemImageButton {
+  background: var(--cn-disc);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  width: 2.75rem;
+  height: 2.75rem;
+  box-shadow: inset 0 0 0 1px var(--cn-disc-rim);
+  color: #fff;
+  padding: 0;
+}
+
+.listItemImageButton .listItemImageButton-icon {
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.listItemImageButton:hover {
+  color: #000;
+  background: #fff;
+  transform: scale(1.08);
 }
 
 .homeSectionsContainer .emby-scroller:has(.card[data-type="CollectionFolder"], a.raised[href*="livetv?tab="]) {
@@ -893,20 +997,14 @@ html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContai
 }
 
 .mainDetailButtons .detailButton {
+  background: var(--cn-button);
   width: 2.9em;
   height: 2.9em;
   color: var(--cn-text);
   transition: background-color .2s,
             transform .2s var(--cn-ease);
-  background: #ffffff1f;
   border-radius: 50%;
   padding: 0 !important;
-}
-
-.mainDetailButtons .detailButton:hover {
-  color: var(--cn-text);
-  background: #ffffff38;
-  transform: scale(1.06);
 }
 
 .mainDetailButtons .detailButton-icon {
@@ -915,15 +1013,23 @@ html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContai
 
 .mainDetailButtons .btnPlay {
   border-radius: var(--cn-pill);
-  color: #000;
-  background: #fff;
+  background: var(--cn-primary);
   width: auto;
+  color: var(--cn-on-primary);
   padding: 0 1.5em !important;
 }
 
-.mainDetailButtons .btnPlay:hover {
-  color: #000;
-  background: #ffffffd9;
+@media (hover: hover) {
+  .mainDetailButtons .detailButton:hover {
+    background: var(--cn-button-hover);
+    color: var(--cn-text);
+    transform: scale(1.06);
+  }
+
+  .mainDetailButtons .btnPlay:hover {
+    background: var(--cn-primary-hover);
+    color: var(--cn-on-primary);
+  }
 }
 
 .mediaInfoText {
@@ -932,8 +1038,9 @@ html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContai
 }
 
 html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
-  background: radial-gradient(55vw 55vh at 18% 12%, #aa5cc329, transparent 70%),
-        radial-gradient(55vw 55vh at 85% 92%, #00a4dc24, transparent 70%), var(--cn-bg);
+  background: radial-gradient(55vw 55vh at 18% 12%, rgb(var(--cn-accent-2-rgb) / 16%), transparent 70%),
+        radial-gradient(55vw 55vh at 85% 92%, rgb(var(--cn-accent-rgb) / 14%), transparent 70%),
+        var(--cn-bg);
 }
 
 #loginPage > .padded-left.padded-right {
@@ -1003,20 +1110,10 @@ html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
 
 #loginPage .button-submit {
   border-radius: var(--cn-radius-control);
-  color: #000;
-  filter: none;
-  background: #fff;
   height: 3rem;
   margin: 0;
   padding: 0;
   font-size: 1rem;
-  font-weight: 700;
-}
-
-#loginPage .button-submit:hover, #loginPage .button-submit:focus {
-  color: #000;
-  filter: none;
-  background: #ffffffd9;
 }
 
 #loginPage .readOnlyContent {

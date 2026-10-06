@@ -31,15 +31,30 @@
     --cn-scrim: rgb(0 0 0 / 55%);
     --cn-track: rgb(255 255 255 / 28%);
 
-    /* Accent: Jellyfin's logo, purple to blue. The -rgb twin feeds MUI. */
+    /* Round and pill buttons over the page or its artwork (item actions, the
+       hero's heart and arrows, the avatar) */
+    --cn-button: rgb(255 255 255 / 14%);
+    --cn-button-hover: rgb(255 255 255 / 24%);
+
+    /* The play disc over a card or an episode thumbnail: glass with a rim */
+    --cn-disc: rgb(255 255 255 / 18%);
+    --cn-disc-rim: rgb(255 255 255 / 35%);
+
+    /* The one primary action of a screen (Play, Sign In, Save): a white pill */
+    --cn-primary: #fff;
+    --cn-primary-hover: rgb(255 255 255 / 85%);
+    --cn-on-primary: #000;
+
+    /* Accent: Jellyfin's logo, purple to blue. The -rgb twins feed MUI and
+       the sign-in glows. The blue marks progress, sliders, toggles and
+       watched items; the purple marks favourites. */
     --cn-accent: #00a4dc;
     --cn-accent-rgb: 0 164 220;
     --cn-accent-dark: #00729a;
     --cn-accent-light: #33b6e3;
+    --cn-accent-2: #aa5cc3;
+    --cn-accent-2-rgb: 170 92 195;
     --cn-gradient: linear-gradient(90deg, #aa5cc3, #00a4dc);
-
-    /* Deeper stops, for white text at 4.5:1 or more on both ends */
-    --cn-gradient-strong: linear-gradient(90deg, #9447b0, #007bb0);
 
     /* Glass */
     --cn-glass: rgb(var(--cn-bg-rgb) / 82%);
@@ -121,7 +136,7 @@ html:root {
     --jf-palette-divider: var(--cn-line);
     --jf-palette-text-secondary: var(--cn-text-2);
     --jf-palette-FilledInput-bg: rgb(255 255 255 / 6%);
-    --jf-palette-Button-inheritContainedBg: rgb(255 255 255 / 10%);
-    --jf-palette-Button-inheritContainedHoverBg: rgb(255 255 255 / 18%);
+    --jf-palette-Button-inheritContainedBg: var(--cn-button);
+    --jf-palette-Button-inheritContainedHoverBg: var(--cn-button-hover);
     --jf-card-borderRadius: var(--cn-radius);
 }
