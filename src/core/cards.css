@@ -1,0 +1,272 @@
+/*
+ * Cards: rounded artwork, a calm hover that keeps every card in place, quiet
+ * captions, glass badges and thin resume bars.
+ */
+
+.cardScalable {
+    border-radius: var(--cn-radius);
+}
+
+/* The surface a card shows while its artwork loads, or when it has none */
+.cardBox:not(.visualCardBox) .cardPadder {
+    background-color: var(--cn-surface);
+}
+
+/*
+ * Sizes. Jellyfin sizes the cards of horizontal rows in viewport widths, so
+ * they grow large on wide screens. Here the artwork follows the
+ * --cn-card-* tokens; the 1.2em is the gap Jellyfin keeps right of each card
+ * box in a row.
+ */
+html:not(.layout-tv) {
+    :is(.overflowPortraitCard, .overflowSquareCard) {
+        width: calc(var(--cn-card-portrait) + 1.2em);
+    }
+
+    .overflowBackdropCard {
+        width: calc(var(--cn-card-backdrop) + 1.2em);
+    }
+}
+
+/* Library grids: one more column than Jellyfin at each width */
+@media (width >= 75em) {
+    html:not(.layout-tv) {
+        :is(.portraitCard, .squareCard) {
+            width: 14.2857%;
+        }
+
+        .backdropCard {
+            width: 20%;
+        }
+    }
+}
+
+@media (width >= 87.5em) {
+    html:not(.layout-tv) :is(.portraitCard, .squareCard) {
+        width: 12.5%;
+    }
+}
+
+@media (width >= 100em) {
+    html:not(.layout-tv) {
+        :is(.portraitCard, .squareCard) {
+            width: 11.1111%;
+        }
+
+        .backdropCard {
+            width: 16.6667%;
+        }
+    }
+}
+
+@media (width >= 120em) {
+    html:not(.layout-tv) :is(.portraitCard, .squareCard) {
+        width: 10%;
+    }
+}
+
+@media (width >= 131.25em) {
+    html:not(.layout-tv) {
+        :is(.portraitCard, .squareCard) {
+            width: 9.0909%;
+        }
+
+        .backdropCard {
+            width: 14.2857%;
+        }
+    }
+}
+
+/* Cards without artwork: a quiet surface instead of Jellyfin's blues. The
+   html prefix outranks Jellyfin's theme stylesheet, which loads after
+   Custom CSS. */
+html
+    :is(
+        .defaultCardBackground,
+        .defaultCardBackground1,
+        .defaultCardBackground2,
+        .defaultCardBackground3,
+        .defaultCardBackground4,
+        .defaultCardBackground5
+    ) {
+    background: linear-gradient(160deg, #303030, var(--cn-surface));
+}
+
+.defaultCardBackground .cardImageIcon,
+.cardImageContainer .cardImageIcon {
+    color: rgb(255 255 255 / 30%);
+}
+
+/*
+ * Hover: no zoom and no outline. The picture brightens a touch and a soft
+ * shade carries the actions. A short delay on the way in keeps a row from
+ * flickering when the pointer sweeps across it; the way out is immediate.
+ */
+.cardImageContainer {
+    transition: filter 0.45s var(--cn-ease);
+}
+
+.cardOverlayContainer,
+.cardOverlayButton-hover {
+    transition:
+        opacity 0.35s var(--cn-ease),
+        background-color 0.2s,
+        color 0.2s,
+        transform 0.25s var(--cn-ease);
+}
+
+.card-hoverable:is(:hover, :focus-within)
+    :is(.cardImageContainer, .cardOverlayContainer, .cardOverlayButton-hover) {
+    transition-delay: 0.12s, 0s, 0s, 0s;
+}
+
+.card-hoverable:hover .cardImageContainer {
+    filter: brightness(1.12);
+}
+
+.cardOverlayContainer {
+    border-radius: var(--cn-radius);
+    background: linear-gradient(to top, rgb(0 0 0 / 55%), rgb(0 0 0 / 0%) 50%);
+
+    /* Play: a compact glass disc that turns white under the pointer. Jellyfin
+       sizes it with this same child selector. */
+    > .cardOverlayFab-primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-top: -1.375rem;
+        margin-left: -1.375rem;
+        padding: 0;
+        background: rgb(255 255 255 / 18%);
+        backdrop-filter: blur(10px);
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 35%);
+        color: #fff;
+        font-size: 1rem;
+
+        &:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.08);
+        }
+    }
+}
+
+/* Jellyfin paints a dark disc behind every overlay icon and sizes the icons,
+   both with !important */
+.cardOverlayFab-primary .cardOverlayButtonIcon,
+.cardOverlayButton-br .cardOverlayButtonIcon {
+    background: transparent !important;
+}
+
+.cardOverlayFab-primary .cardOverlayButtonIcon {
+    font-size: 1.5rem !important;
+    color: inherit;
+}
+
+/* Corner actions (watched, favourite, menu): smaller and quieter */
+.cardOverlayButton-br {
+    .cardOverlayButton {
+        padding: 0.3em;
+    }
+
+    .cardOverlayButtonIcon {
+        font-size: 1.15rem !important;
+        color: rgb(255 255 255 / 85%);
+    }
+}
+
+/* Captions: left aligned, quiet. Jellyfin centres them with !important. */
+.cardText,
+.cardTextCentered,
+.cardTextCentered > .textActionButton {
+    text-align: left !important;
+}
+
+.cardText {
+    padding-right: 0.15em;
+    padding-left: 0.15em;
+}
+
+.cardText-first {
+    font-weight: 600;
+    color: var(--cn-text);
+}
+
+.cardText-secondary {
+    font-size: 0.85em;
+    color: var(--cn-text-3);
+}
+
+/* Watched and unwatched badges: glass instead of solid colour */
+.playedIndicator,
+.countIndicator {
+    background: var(--cn-scrim);
+    backdrop-filter: blur(10px);
+    color: #fff;
+
+    > svg {
+        fill: #fff;
+    }
+}
+
+/* Resume bars: thin, inset, rounded (legacy cards, then React grid cards) */
+.innerCardFooter .itemProgressBar {
+    overflow: hidden;
+    height: 4px;
+    margin: 0 0.7em 0.7em;
+    border-radius: var(--cn-pill);
+    background: var(--cn-track);
+}
+
+.itemProgressBarForeground {
+    border-radius: var(--cn-pill);
+    background-image: var(--cn-gradient);
+}
+
+.itemLinearProgress.MuiLinearProgress-root {
+    height: 4px;
+    border-radius: var(--cn-pill);
+    background-color: var(--cn-track);
+}
+
+.itemLinearProgress .MuiLinearProgress-bar {
+    border-radius: var(--cn-pill);
+    background-color: var(--cn-accent);
+    background-image: var(--cn-gradient);
+}
+
+/* Keyboard and remote focus: a white ring like tvOS (Jellyfin colours the
+   ring with !important) */
+.card.show-focus:focus .cardBox:not(.visualCardBox) .cardScalable {
+    border-color: #fff !important;
+}
+
+/* Cast and crew: round portraits. Jellyfin rounds card layers with selectors
+   up to three classes deep, some in its theme stylesheet that loads after
+   Custom CSS, hence !important on the radius. The captions centre over the
+   left alignment above, which is !important too. */
+.personCard {
+    :is(.cardScalable, .cardPadder, .cardImageContainer, .cardOverlayContainer, .blurhash-canvas) {
+        border-radius: 50% !important;
+    }
+
+    :is(.cardPadder-overflowPortrait, .cardPadder-portrait) {
+        padding-bottom: 100%;
+    }
+
+    .coveredImage {
+        background-position: center 20%;
+    }
+
+    :is(.cardText, .cardTextCentered > .textActionButton) {
+        text-align: center !important;
+    }
+}
+
+.paperList,
+.visualCardBox,
+.collapseContent {
+    border-radius: var(--cn-radius);
+}

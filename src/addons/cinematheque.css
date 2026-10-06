@@ -1,0 +1,97 @@
+/*
+ * Cinema add-on for Cinematheque (gauthier-se): its header, tabs and tiles
+ * in line with the library pages. Scoped to the plugin's own containers to
+ * outrank its rules; only colour needs !important, which the plugin sets
+ * that way.
+ */
+
+:is(.cinematheque, .cin-appbar) {
+    .cin-title {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    /* Tabs: text pills without icons, like the libraries in the top bar */
+    .cin-tab {
+        min-width: 0;
+        padding: 6px 16px;
+        border-radius: var(--cn-pill);
+        font: 600 0.95rem/1.75 var(--cn-font);
+        color: var(--cn-text-2) !important;
+        transition:
+            color 0.2s,
+            background-color 0.2s;
+
+        &:hover {
+            background: var(--cn-hover);
+            color: var(--cn-text) !important;
+        }
+    }
+
+    .cin-tab-active,
+    .cin-tab-active:hover {
+        background: var(--cn-selected);
+        color: var(--cn-text) !important;
+    }
+
+    .cin-tab-icon {
+        display: none;
+    }
+
+    .cin-input {
+        border: 1px solid var(--cn-field-line);
+        border-radius: var(--cn-radius-control);
+        background: var(--cn-field);
+
+        &[type="search"] {
+            border-radius: var(--cn-pill);
+        }
+    }
+
+    /* Countries and movements: the home tile surface */
+    :is(.cin-country, .cin-movement) {
+        border: 0;
+        border-radius: var(--cn-radius);
+        background: var(--cn-surface);
+        transition: background-color 0.35s var(--cn-ease);
+
+        &:hover {
+            background: var(--cn-surface-hover);
+        }
+    }
+
+    .cin-chip {
+        border-color: rgb(255 255 255 / 14%);
+
+        &:hover {
+            border-color: rgb(255 255 255 / 40%);
+        }
+    }
+
+    .cin-chip-active {
+        border-color: transparent;
+        background: var(--cn-selected);
+        color: var(--cn-text);
+    }
+
+    .cin-more {
+        padding: 0.65rem 1.6rem;
+        border: 0;
+        border-radius: var(--cn-pill);
+        background: rgb(255 255 255 / 10%);
+        font-weight: 600;
+
+        &:hover {
+            background: rgb(255 255 255 / 18%);
+        }
+    }
+
+    .cin-progress-bar {
+        background: var(--cn-gradient);
+    }
+
+    .cin-seen-badge {
+        background: var(--cn-scrim);
+        backdrop-filter: blur(10px);
+    }
+}

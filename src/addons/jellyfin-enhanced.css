@@ -1,0 +1,40 @@
+/*
+ * Cinema add-on for Jellyfin Enhanced (n00bcodr): its card tags step aside
+ * on hover, and its drawer entries match the rest of the drawer.
+ */
+
+/* Language flags and ratings fade out while the card actions show */
+.card:hover .je-tag-host {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+/* The plugin adds its entries with the legacy drawer markup */
+body:not(.dashboardDocument) .MuiDrawer-paper .jellyfinEnhancedSection {
+    .sidebarHeader {
+        margin: 0;
+        padding: 0 16px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 48px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--cn-text-3);
+    }
+
+    .navMenuOption {
+        display: flex;
+        align-items: center;
+        margin: 1px 8px;
+        padding: 8px 16px !important; /* Jellyfin pads .navMenuOption with !important */
+        border-radius: var(--cn-radius-control);
+        font-size: 1rem;
+        color: var(--cn-text);
+    }
+
+    .navMenuOptionIcon {
+        width: 24px;
+        margin: 0 12px 0 0;
+        color: var(--cn-text-2);
+    }
+}

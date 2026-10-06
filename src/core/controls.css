@@ -1,0 +1,89 @@
+/*
+ * Controls: one shape for every button, field and toggle. MUI reads
+ * --jf-shape-borderRadius for its surfaces and inputs; buttons outside a
+ * group become pills, like the legacy ones. The dashboard keeps Jellyfin's
+ * own look, so the MUI rules stop at its body class.
+ */
+
+body:not(.dashboardDocument) {
+    --jf-shape-borderRadius: var(--cn-radius-control);
+
+    .MuiButton-root:not(.MuiButtonGroup-grouped) {
+        border-radius: var(--cn-pill);
+    }
+
+    /* Icon groups (filter, sort, view, paging): round buttons, no dividers */
+    .MuiButtonGroup-text {
+        gap: 2px;
+
+        > .MuiButtonGroup-grouped {
+            min-width: 40px;
+            height: 40px;
+            padding: 0 10px;
+            border: 0;
+            border-radius: var(--cn-pill);
+        }
+    }
+}
+
+/* Legacy buttons */
+.raised,
+.button-submit,
+a[data-role="button"],
+.fab {
+    border-radius: var(--cn-pill);
+}
+
+.button-submit {
+    background: var(--cn-gradient-strong);
+    color: #fff;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+        background: var(--cn-gradient-strong);
+        color: #fff;
+        filter: brightness(1.12);
+    }
+}
+
+/* Fields */
+.emby-input,
+.emby-textarea,
+.emby-select-withcolor {
+    border-width: 1px;
+    border-radius: var(--cn-radius-control);
+}
+
+/* Browser autofill paints fields yellow; an inset shadow keeps them dark.
+   !important keeps it over the focus ring box-shadow of the sign-in fields. */
+.emby-input:autofill {
+    box-shadow: 0 0 0 100px var(--cn-surface-hover) inset !important;
+    caret-color: var(--cn-text);
+    -webkit-text-fill-color: var(--cn-text);
+    transition: background-color 600000s 0s;
+}
+
+.checkboxOutline {
+    border-radius: 6px;
+}
+
+.searchFields {
+    .searchfields-txtSearch {
+        box-sizing: border-box;
+        height: 2.75rem;
+        padding: 0 1.1rem;
+        border: 1px solid var(--cn-field-line);
+        border-radius: var(--cn-pill);
+        background: var(--cn-field);
+        font-size: 1rem;
+
+        &:focus {
+            border-color: rgb(255 255 255 / 50%);
+        }
+    }
+
+    .searchfields-icon {
+        color: var(--cn-text-3);
+    }
+}

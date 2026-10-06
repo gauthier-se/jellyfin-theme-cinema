@@ -1,0 +1,85 @@
+/*
+ * Base: one type family everywhere, quiet scrollbars, a black canvas and
+ * the section titles.
+ */
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+select,
+textarea,
+.MuiTypography-root,
+.MuiButtonBase-root,
+.MuiInputBase-root,
+.MuiFormLabel-root,
+.MuiMenuItem-root,
+.MuiListItemText-primary,
+.MuiListItemText-secondary,
+.MuiChip-root,
+.MuiTooltip-tooltip,
+.MuiTableCell-root,
+.MuiAlert-message {
+    font-family: var(--cn-font);
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbars: a thin pale thumb on no track */
+* {
+    scrollbar-color: rgb(255 255 255 / 18%) transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece {
+    background: transparent;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb:horizontal,
+::-webkit-scrollbar-thumb:vertical {
+    background: rgb(255 255 255 / 18%);
+    border-radius: var(--cn-pill);
+}
+
+/*
+ * Display > Backdrops paints a random film behind every page (Jellyfin
+ * Tweaks can turn it on for everyone). Keep the canvas black, except on item
+ * pages, where the artwork is the hero, and during playback: the video sits
+ * behind the page, which Jellyfin makes transparent with .transparentDocument.
+ */
+html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) {
+    .backdropContainer {
+        display: none;
+    }
+
+    .backgroundContainer {
+        background: var(--cn-bg);
+        opacity: 1;
+    }
+}
+
+/* Section titles */
+.sectionTitle-cards,
+.sectionTitle {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--cn-text);
+}
+
+.layout-desktop .sectionTitle-cards {
+    font-size: 1.35rem;
+}
+
+.sectionTitleTextButton .material-icons {
+    color: var(--cn-text-3);
+}

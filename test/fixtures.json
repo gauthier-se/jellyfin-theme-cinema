@@ -1,0 +1,67 @@
+{
+  "$comment": "Public domain films and series, and open films from the Blender Studio, so screenshots show artwork that can be shared. The media files are generated test patterns; Jellyfin fetches the metadata.",
+  "movies": [
+    "Night of the Living Dead (1968)",
+    "Nosferatu (1922)",
+    "Metropolis (1927)",
+    "The General (1926)",
+    "Charade (1963)",
+    "His Girl Friday (1940)",
+    "Sherlock Jr. (1924)",
+    "The Kid (1921)",
+    "Detour (1945)",
+    "The Cabinet of Dr. Caligari (1920)",
+    "A Trip to the Moon (1902)",
+    "Plan 9 from Outer Space (1957)",
+    "Big Buck Bunny (2008)",
+    "Sintel (2010)",
+    "Tears of Steel (2012)",
+    "Cosmos Laundromat (2015)",
+    "Sprite Fright (2021)",
+    "Charge (2022)"
+  ],
+  "shows": [
+    "Flash Gordon (1954)",
+    "Dragnet (1951)",
+    "One Step Beyond (1959)",
+    "The Beverly Hillbillies (1962)",
+    "Bonanza (1959)",
+    "The Lucy Show (1962)"
+  ],
+  "episodesPerShow": 3,
+  "music": [
+    {
+      "artist": "Cinema Test Ensemble",
+      "album": "Overtures",
+      "tracks": ["Opening Night", "Intermission", "End Credits"]
+    },
+    {
+      "artist": "The Projectionists",
+      "album": "Reel Changes",
+      "tracks": ["First Reel", "Second Reel"]
+    }
+  ],
+  "channels": ["Channel One", "Channel Two", "Arts", "News", "Classics"],
+  "programmes": [
+    "Evening News",
+    "Quiz Night",
+    "Silent Classics",
+    "Nature Hour",
+    "Late Movie",
+    "Weather"
+  ],
+  "plugins": [
+    {
+      "repository": "https://www.iamparadox.dev/jellyfin/plugins/manifest.json",
+      "names": ["File Transformation", "Media Bar", "Home Screen Sections", "Plugin Pages"]
+    },
+    {
+      "repository": "https://raw.githubusercontent.com/n00bcodr/jellyfin-plugins/main/12/manifest.json",
+      "names": ["Jellyfin Enhanced", "Jellyfin Tweaks"]
+    },
+    {
+      "repository": "https://gauthier-se.github.io/jellyfin-plugin-cinematheque/manifest.json",
+      "names": ["Cinematheque"]
+    }
+  ]
+}

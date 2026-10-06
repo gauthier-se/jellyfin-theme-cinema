@@ -1,0 +1,49 @@
+name: Something looks wrong
+description: A screen, component or plugin that the theme breaks or leaves unstyled
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What looks wrong?
+      description: Which page, what you expected, and a screenshot with and without the theme if you can.
+    validations:
+      required: true
+  - type: input
+    id: theme-version
+    attributes:
+      label: Cinema version
+      description: The @v… in your import line.
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: jellyfin-version
+    attributes:
+      label: Jellyfin version
+      placeholder: 12.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: layout
+    attributes:
+      label: Display mode
+      description: Settings > Display > Display mode.
+      options:
+        - Auto / modern
+        - Desktop (legacy)
+        - Mobile (legacy)
+        - TV
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Browser or app
+      placeholder: Firefox 140 on Windows, Jellyfin Media Player, Android app...
+  - type: textarea
+    id: plugins
+    attributes:
+      label: Add-ons and plugins
+      description: The add-ons you import, and any plugin that changes the web client (Media Bar, Home Screen Sections, Jellyfin Enhanced...).

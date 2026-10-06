@@ -1,0 +1,137 @@
+/*
+ * Sign-in: a compact frosted card on a black page lit by two faint glows,
+ * one white action, and the secondary actions as quiet links.
+ */
+
+html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
+    background:
+        radial-gradient(55vw 55vh at 18% 12%, rgb(170 92 195 / 16%), transparent 70%),
+        radial-gradient(55vw 55vh at 85% 92%, rgb(0 164 220 / 14%), transparent 70%), var(--cn-bg);
+}
+
+#loginPage {
+    > .padded-left.padded-right {
+        box-sizing: border-box;
+        width: min(25rem, calc(100% - 2em));
+        margin: auto;
+        padding: 2.25rem 2.25rem 1.5rem !important; /* beats .padded-bottom-page */
+        border: 1px solid var(--cn-line);
+        border-radius: var(--cn-radius-lg);
+        background: rgb(var(--cn-surface-rgb) / 72%);
+        backdrop-filter: saturate(160%) blur(24px);
+        box-shadow: 0 30px 80px rgb(0 0 0 / 45%);
+    }
+
+    .manualLoginForm,
+    .readOnlyContent {
+        width: 100%;
+        max-width: none;
+    }
+
+    .manualLoginForm > .padded-left.padded-right {
+        padding: 0;
+    }
+
+    h1 {
+        margin: 0 0 1.5rem !important; /* the user picker's heading sets margin-top inline */
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--cn-text);
+    }
+
+    .inputContainer {
+        margin-bottom: 1.1rem;
+    }
+
+    .inputLabel {
+        margin-bottom: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--cn-text-2);
+    }
+
+    .emby-input {
+        box-sizing: border-box;
+        height: 3rem;
+        padding: 0 1rem;
+        border: 1px solid var(--cn-field-line);
+        border-radius: var(--cn-radius-control);
+        background: var(--cn-field);
+        font-size: 1rem;
+        transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
+
+        &:focus {
+            border-color: rgb(255 255 255 / 55%);
+            box-shadow: 0 0 0 3px var(--cn-hover);
+        }
+    }
+
+    .checkboxContainer {
+        margin: 0.25rem 0 1.5rem;
+    }
+
+    .checkboxLabel {
+        color: var(--cn-text-2);
+    }
+
+    /* One white action, like a TV sign-in */
+    .button-submit {
+        height: 3rem;
+        margin: 0;
+        padding: 0;
+        border-radius: var(--cn-radius-control);
+        background: #fff;
+        color: #000;
+        font-size: 1rem;
+        font-weight: 700;
+        filter: none;
+
+        &:hover,
+        &:focus {
+            background: rgb(255 255 255 / 85%);
+            color: #000;
+            filter: none;
+        }
+    }
+
+    /* Quick Connect and the rest: quiet links on one line under a hairline */
+    .readOnlyContent {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 0.5rem;
+        justify-content: center;
+        margin: 1.25rem 0 0 !important; /* overrides an inline margin */
+        padding-top: 1rem;
+        border-top: 1px solid var(--cn-line);
+
+        .raised {
+            flex: 0 1 auto;
+            width: auto;
+            height: auto;
+            margin: 0;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--cn-radius);
+            background: transparent;
+            color: var(--cn-text-2);
+            font-size: 0.9rem;
+            font-weight: 500;
+
+            &:hover,
+            &:focus {
+                background: var(--cn-hover);
+                color: var(--cn-text);
+            }
+
+            &.hide {
+                display: none;
+            }
+        }
+    }
+
+    .loginDisclaimerContainer:has(.loginDisclaimer:empty) {
+        display: none;
+    }
+}

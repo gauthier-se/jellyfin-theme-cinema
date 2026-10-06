@@ -1,0 +1,19 @@
+# Throwaway Jellyfin for developing the theme. Its data lives in test/.data,
+# which git ignores; `npm run server:down` stops it, deleting test/.data
+# resets it.
+name: cinema-test
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:12.1
+    ports:
+      - 127.0.0.1:${CINEMA_TEST_PORT:-8096}:8096
+    volumes:
+      - ./.data/config:/config
+      - ./.data/cache:/cache
+      - ./.data/media:/media
+    healthcheck:
+      test: [CMD, curl, -fsS, http://localhost:8096/health]
+      interval: 5s
+      timeout: 3s
+      retries: 30

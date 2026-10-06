@@ -1,0 +1,115 @@
+/*
+ * Home: My Media and the Live TV shortcuts as plain tiles of one size. Each
+ * row's scroller is a size container, so 100cqw is the row's width and a
+ * tile is one of --cn-tile-columns columns across it, whatever the number
+ * of tiles in the row. A shorter row ends early rather than stretching.
+ */
+.homeSectionsContainer
+    .emby-scroller:has(.card[data-type="CollectionFolder"], a.raised[href*="livetv?tab="]) {
+    --cn-tile-w: max(
+        var(--cn-tile-min),
+        (100cqw - (var(--cn-tile-columns) - 1) * var(--cn-tile-gap)) / var(--cn-tile-columns)
+    );
+
+    container-type: inline-size;
+}
+
+/*
+ * My Media is the only home row holding CollectionFolder cards, so the row
+ * is found through them. That way Playlists and Live TV, which are
+ * UserViews, get the same tile as the libraries.
+ */
+.homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) {
+    .scrollSlider {
+        display: flex;
+        gap: var(--cn-tile-gap);
+    }
+
+    .card {
+        flex: none;
+        width: var(--cn-tile-w);
+    }
+
+    .cardBox {
+        position: relative;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .cardPadder {
+        height: var(--cn-tile-h);
+        padding-bottom: 0;
+        background: var(--cn-surface);
+        transition: background-color 0.35s var(--cn-ease);
+    }
+
+    .card:hover .cardPadder {
+        background: var(--cn-surface-hover);
+        transition-delay: 0.08s;
+    }
+
+    /* Tiles only lighten on hover: no artwork, shade or card actions */
+    :is(.cardImageContainer, .blurhash-canvas, .cardImageIcon, .cardIndicators) {
+        opacity: 0;
+    }
+
+    .cardOverlayContainer {
+        background: transparent;
+    }
+
+    :is(.cardOverlayFab-primary, .cardOverlayButton-br) {
+        display: none;
+    }
+
+    /* Centred over the cards' left alignment, which is !important */
+    .cardText {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--cn-tile-font);
+        font-weight: 600;
+        text-align: center !important;
+        pointer-events: none;
+    }
+}
+
+/* The "My Media (small)" variant */
+.homeLibraryButton {
+    border-radius: var(--cn-radius);
+    background: var(--cn-surface);
+    font-weight: 600;
+}
+
+/* Live TV shortcuts, as the same tile */
+.homeSectionsContainer {
+    .scrollSlider:has(> a.raised[href*="livetv?tab="]) {
+        display: flex;
+        gap: var(--cn-tile-gap);
+    }
+
+    a.raised[href*="livetv?tab="] {
+        box-sizing: border-box;
+        display: flex;
+        flex: none;
+        align-items: center;
+        justify-content: center;
+        width: var(--cn-tile-w);
+        height: var(--cn-tile-h);
+        margin: 0;
+        padding: 0 1rem;
+        border-radius: var(--cn-radius);
+        background: var(--cn-surface);
+        box-shadow: none;
+        color: var(--cn-text);
+        font-size: var(--cn-tile-font);
+        font-weight: 600;
+        transition: background-color 0.35s var(--cn-ease);
+
+        &:hover {
+            background: var(--cn-surface-hover);
+            transition-delay: 0.08s;
+        }
+    }
+}

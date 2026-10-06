@@ -1,0 +1,107 @@
+/*
+ * Everything that floats over the page: menus, action sheets, tooltips,
+ * dialogs, toasts and the drawer. Rules that would reach the dashboard stop
+ * at its body class, since it keeps Jellyfin's own look.
+ */
+
+/* Menus and action sheets: frosted panels */
+.MuiPopover-paper,
+.MuiMenu-paper,
+.actionSheet {
+    background-color: var(--cn-menu);
+    background-image: none;
+    backdrop-filter: var(--cn-blur);
+    border: 1px solid var(--cn-line);
+    border-radius: var(--cn-radius-lg);
+    box-shadow: 0 20px 50px rgb(0 0 0 / 50%);
+}
+
+/* Items sit inside the panel's padding with a smaller, concentric radius */
+body:not(.dashboardDocument) .MuiMenu-list {
+    padding: 6px;
+
+    :is(.MuiMenuItem-root, .MuiListItemButton-root) {
+        border-radius: var(--cn-radius);
+    }
+}
+
+.actionSheetScroller {
+    padding: 6px;
+}
+
+.actionSheetMenuItem {
+    border-radius: var(--cn-radius);
+}
+
+.actionsheetDivider {
+    margin: 6px 4px;
+}
+
+/* Full-screen action sheets (phones) are pages, not floating panels */
+.actionsheet-fullscreen {
+    border: 0;
+    border-radius: 0;
+    background-color: var(--cn-bg);
+}
+
+body:not(.dashboardDocument) .MuiTooltip-tooltip {
+    padding: 6px 10px;
+    border-radius: var(--cn-radius);
+    background: var(--cn-raised);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 35%);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.MuiDialog-paper,
+.dialog:not(.dialog-fullscreen) {
+    border-radius: var(--cn-radius-lg);
+    background-image: none;
+}
+
+.toast {
+    border-radius: var(--cn-pill);
+    background: var(--cn-raised);
+    backdrop-filter: blur(20px);
+}
+
+/* Drawer (phones and narrow windows) */
+body:not(.dashboardDocument) .MuiDrawer-paper {
+    background-color: rgb(var(--cn-bg-rgb) / 92%);
+    background-image: none;
+    backdrop-filter: saturate(160%) blur(24px);
+    border-right: 1px solid var(--cn-line);
+    box-shadow: 20px 0 60px rgb(0 0 0 / 40%);
+
+    .MuiListItemButton-root {
+        margin: 1px 8px;
+        border-radius: var(--cn-radius-control);
+
+        &.Mui-selected {
+            background: var(--cn-selected);
+        }
+    }
+
+    .MuiListItemIcon-root {
+        color: var(--cn-text-2);
+    }
+
+    .Mui-selected :is(.MuiListItemIcon-root, .MuiListItemText-primary) {
+        color: var(--cn-text);
+    }
+
+    .MuiListSubheader-root {
+        background: transparent;
+        color: var(--cn-text-3);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    .MuiDivider-root {
+        margin: 6px 16px;
+        border-color: var(--cn-line);
+    }
+}

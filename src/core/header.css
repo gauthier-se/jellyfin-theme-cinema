@@ -1,0 +1,217 @@
+/*
+ * Top bar, the MUI app bar of the modern layout: a light scrim over artwork
+ * at the top of the page, a frosted fade once it scrolls, the server name on
+ * the left and the libraries as centred pills.
+ */
+
+.MuiAppBar-root {
+    /*
+     * Once scrolled, two layers sit behind the navigation: a blur that thins
+     * out just below it, and a colour wash eased over a longer run. Stepped
+     * stops avoid the band a straight ramp leaves, so the rows dissolve under
+     * the bar instead of meeting a line.
+     */
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s var(--cn-ease);
+    }
+
+    &::before {
+        inset: 0 0 -40px;
+        backdrop-filter: blur(12px);
+        mask-image: linear-gradient(
+            to bottom,
+            #000 0%,
+            #000 45%,
+            rgb(0 0 0 / 50%) 70%,
+            transparent 100%
+        );
+    }
+
+    &::after {
+        inset: 0 0 -72px;
+        background: linear-gradient(
+            to bottom,
+            rgb(var(--cn-bg-rgb) / 92%) 0%,
+            rgb(var(--cn-bg-rgb) / 86%) 32%,
+            rgb(var(--cn-bg-rgb) / 70%) 50%,
+            rgb(var(--cn-bg-rgb) / 48%) 64%,
+            rgb(var(--cn-bg-rgb) / 28%) 77%,
+            rgb(var(--cn-bg-rgb) / 12%) 88%,
+            rgb(var(--cn-bg-rgb) / 3%) 96%,
+            rgb(var(--cn-bg-rgb) / 0%) 100%
+        );
+    }
+
+    /* Top of the page: a light scrim so the bar reads over artwork */
+    &.MuiAppBar-colorTransparent {
+        background: linear-gradient(to bottom, rgb(0 0 0 / 45%), rgb(0 0 0 / 0%));
+    }
+
+    /* Scrolled: no slab and no edge, the two layers take over */
+    &.MuiAppBar-colorDefault {
+        background: transparent;
+        box-shadow: none;
+
+        &::before,
+        &::after {
+            opacity: 1;
+        }
+    }
+
+    .MuiAvatar-root {
+        background: rgb(255 255 255 / 14%);
+        color: var(--cn-text);
+    }
+
+    /* Second row on library pages: title, count, then the actions */
+    > .MuiToolbar-root + .MuiToolbar-root .MuiTypography-h2 {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    .MuiButtonGroup-root {
+        border-radius: var(--cn-pill);
+        box-shadow: none;
+
+        .MuiButtonGroup-firstButton {
+            border-radius: var(--cn-pill) 0 0 var(--cn-pill);
+        }
+
+        .MuiButtonGroup-lastButton {
+            border-radius: 0 var(--cn-pill) var(--cn-pill) 0;
+        }
+    }
+
+    /* Every primary action in the bars (Play All, New Collection, New
+       Playlist) is the same white pill */
+    .MuiButton-contained:not(.Mui-disabled) {
+        background: #fff;
+        color: #000;
+        box-shadow: none;
+
+        &:hover {
+            background: rgb(255 255 255 / 85%);
+            box-shadow: none;
+        }
+    }
+
+    .MuiButtonGroup-contained .MuiButtonGroup-grouped:not(:last-of-type) {
+        border-right-color: rgb(0 0 0 / 15%);
+    }
+}
+
+/* First row: server name, libraries, then the icon buttons */
+.MuiAppBar-root > .MuiToolbar-root:first-child {
+    .layout-desktop & {
+        min-height: var(--cn-bar-h);
+    }
+
+    > .MuiStack-root {
+        /* Server name, like a wordmark: no hover slab, it dims */
+        > a:first-child {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--cn-text);
+            background: transparent;
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.75;
+            }
+
+            .MuiTouchRipple-root {
+                display: none;
+            }
+        }
+
+        /* Libraries: text pills, no icons */
+        > :not(:first-child) {
+            min-width: 0;
+            padding: 6px 16px;
+            border-radius: var(--cn-pill);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--cn-text-2);
+            transition:
+                color 0.2s,
+                background-color 0.2s;
+
+            .MuiButton-startIcon {
+                display: none;
+            }
+
+            &:hover {
+                color: var(--cn-text);
+                background-color: var(--cn-hover);
+            }
+        }
+
+        /* The current library */
+        > .MuiButton-colorPrimary {
+            color: var(--cn-text);
+            background-color: var(--cn-selected);
+        }
+    }
+
+    .MuiIconButton-root {
+        color: var(--cn-text-2);
+
+        &:hover {
+            color: var(--cn-text);
+            background-color: var(--cn-hover);
+        }
+    }
+
+    /* Medium screens: centre the libraries in the room left between the ends */
+    @media (width >= 900px) and (width < 1200px) {
+        > .MuiStack-root {
+            flex: 1 1 auto;
+            min-width: 0;
+
+            > a:first-child,
+            > :last-child {
+                margin-right: auto;
+            }
+        }
+
+        > .MuiBox-root {
+            flex-grow: 0;
+        }
+    }
+
+    /* Wide screens: the libraries sit in the true centre of the bar */
+    @media (width >= 1200px) {
+        position: relative;
+
+        > .MuiStack-root {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            pointer-events: none;
+
+            > * {
+                margin: 0;
+                pointer-events: auto;
+            }
+
+            > a:first-child {
+                position: absolute;
+                left: var(--cn-gutter);
+            }
+        }
+    }
+}
+
+.MuiChip-root {
+    background-color: rgb(255 255 255 / 10%);
+}

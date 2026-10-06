@@ -1,0 +1,17 @@
+/*
+ * Cinema: a dark, quiet theme for the modern layout of Jellyfin 12.
+ *
+ * This entry only lists the parts, in cascade order. `npm run build` inlines
+ * them into dist/cinema.css. Plugin support lives in src/addons and ships
+ * as separate files, so each server imports only what it runs.
+ */
+
+@import url("core/tokens.css");
+@import url("core/base.css");
+@import url("core/header.css");
+@import url("core/overlays.css");
+@import url("core/controls.css");
+@import url("core/cards.css");
+@import url("core/home.css");
+@import url("core/details.css");
+@import url("core/login.css");

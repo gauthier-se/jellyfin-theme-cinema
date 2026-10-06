@@ -1,0 +1,127 @@
+/*
+ * Design tokens. To customise the theme, override any --cn-* value after the
+ * @import line in Custom CSS:
+ *
+ *     :root {
+ *         --cn-accent: #e50914;
+ *         --cn-accent-rgb: 229 9 20;
+ *     }
+ */
+
+:root {
+    /* Canvas and surfaces: Netflix's soft black, and neutral greys a step
+       above it for tiles, menus and tooltips */
+    --cn-bg: #141414;
+    --cn-bg-rgb: 20 20 20;
+    --cn-surface: #232323;
+    --cn-surface-rgb: 35 35 35;
+    --cn-surface-hover: #2e2e2e;
+    --cn-line: rgb(255 255 255 / 8%);
+
+    /* Text */
+    --cn-text: #fff;
+    --cn-text-2: rgb(255 255 255 / 72%);
+    --cn-text-3: rgb(255 255 255 / 50%);
+
+    /* Washes laid over any surface */
+    --cn-hover: rgb(255 255 255 / 8%);
+    --cn-selected: rgb(255 255 255 / 16%);
+    --cn-field: rgb(255 255 255 / 5%);
+    --cn-field-line: rgb(255 255 255 / 10%);
+    --cn-scrim: rgb(0 0 0 / 55%);
+    --cn-track: rgb(255 255 255 / 28%);
+
+    /* Accent: Jellyfin's logo, purple to blue. The -rgb twin feeds MUI. */
+    --cn-accent: #00a4dc;
+    --cn-accent-rgb: 0 164 220;
+    --cn-accent-dark: #00729a;
+    --cn-accent-light: #33b6e3;
+    --cn-gradient: linear-gradient(90deg, #aa5cc3, #00a4dc);
+
+    /* Deeper stops, for white text at 4.5:1 or more on both ends */
+    --cn-gradient-strong: linear-gradient(90deg, #9447b0, #007bb0);
+
+    /* Glass */
+    --cn-glass: rgb(var(--cn-bg-rgb) / 82%);
+    --cn-menu: rgb(38 38 38 / 92%);
+    --cn-raised: rgb(48 48 48 / 92%);
+    --cn-blur: saturate(180%) blur(24px);
+
+    /* Shape. Panels (menus, dialogs, the sign-in card) take --cn-radius-lg:
+       their items' --cn-radius plus the 6px padding around them. */
+    --cn-radius: 8px;
+    --cn-radius-control: 10px;
+    --cn-radius-lg: 14px;
+    --cn-pill: 999px;
+
+    /* Jellyfin's page gutter (its .padded-left), which the theme lines up on */
+    --cn-gutter: 3.3%;
+
+    /* Card artwork widths in horizontal rows, and the poster on item pages.
+       Library grids add a column at each step instead (cards.css). The row
+       widths are in px: Jellyfin shrinks the root font size on phones, and
+       cards there should follow the screen, not that scale. */
+    --cn-card-portrait: clamp(128px, 90px + 5vw, 200px);
+    --cn-card-backdrop: clamp(244px, 168px + 7.5vw, 328px);
+    --cn-detail-poster: clamp(11.5rem, 14vw, 17rem);
+
+    /* Height of the artwork above the title on item pages (desktop) */
+    --cn-detail-header: clamp(15rem, 40vh, 30rem);
+
+    /* Home tiles (My Media, Live TV): one size for both rows. A tile is one
+       of --cn-tile-columns columns across the row, never under
+       --cn-tile-min; past that the row scrolls. */
+    --cn-tile-columns: 7;
+    --cn-tile-min: 140px;
+    --cn-tile-gap: 18px;
+    --cn-tile-h: clamp(6rem, 6.8vw, 8.5rem);
+    --cn-tile-font: clamp(1.1rem, 0.85rem + 0.45vw, 1.3rem);
+
+    /* Motion and type */
+    --cn-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --cn-font:
+        -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter",
+        "Segoe UI Variable Display", "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial,
+        sans-serif;
+
+    /* Height of the top bar, which the layout reads */
+    --cn-bar-h: 48px;
+}
+
+:root.layout-desktop {
+    --cn-bar-h: 64px;
+}
+
+/* Tablets and narrow windows: fewer, larger home tiles */
+@media (width < 1200px) {
+    :root {
+        --cn-tile-columns: 5;
+    }
+}
+
+/*
+ * Jellyfin's own variables, fed from the tokens so MUI components and the
+ * legacy pages follow along. html:root outranks the [data-theme] block
+ * Jellyfin declares them in.
+ */
+html:root {
+    --jf-palette-background-default: var(--cn-bg);
+    --jf-palette-background-defaultChannel: var(--cn-bg-rgb);
+    --jf-palette-background-paper: var(--cn-surface);
+    --jf-palette-background-paperChannel: var(--cn-surface-rgb);
+    --jf-palette-primary-main: var(--cn-accent);
+    --jf-palette-primary-mainChannel: var(--cn-accent-rgb);
+    --jf-palette-primary-dark: var(--cn-accent-dark);
+    --jf-palette-primary-light: var(--cn-accent-light);
+    --jf-palette-primary-contrastText: rgb(0 0 0 / 87%);
+    --jf-palette-secondary-main: #fff;
+    --jf-palette-secondary-mainChannel: 255 255 255;
+    --jf-palette-secondary-contrastText: #000;
+    --jf-palette-AppBar-defaultBg: var(--cn-glass);
+    --jf-palette-divider: var(--cn-line);
+    --jf-palette-text-secondary: var(--cn-text-2);
+    --jf-palette-FilledInput-bg: rgb(255 255 255 / 6%);
+    --jf-palette-Button-inheritContainedBg: rgb(255 255 255 / 10%);
+    --jf-palette-Button-inheritContainedHoverBg: rgb(255 255 255 / 18%);
+    --jf-card-borderRadius: var(--cn-radius);
+}

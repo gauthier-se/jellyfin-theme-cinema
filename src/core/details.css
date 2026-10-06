@@ -1,0 +1,169 @@
+/*
+ * Item pages: the artwork runs under the top bar and fades into the page,
+ * a large title, a white play pill and round glass buttons.
+ */
+
+.itemDetailPage {
+    .itemBackdrop {
+        .layout-desktop & {
+            height: calc(var(--cn-detail-header) + var(--cn-bar-h));
+            margin-top: calc(-1 * var(--cn-bar-h));
+            transition: height 0.4s var(--cn-ease);
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    to top,
+                    var(--cn-bg) 0%,
+                    rgb(var(--cn-bg-rgb) / 60%) 30%,
+                    rgb(var(--cn-bg-rgb) / 0%) 65%
+                ),
+                linear-gradient(
+                    to right,
+                    rgb(var(--cn-bg-rgb) / 55%) 0%,
+                    rgb(var(--cn-bg-rgb) / 0%) 50%
+                );
+            pointer-events: none;
+        }
+
+        /* Phones paint the artwork on this element; no URL once it has
+           loaded (no lazy-hidden left) means the item has none */
+        .layout-mobile &:not(.lazy-hidden, [style*="url("]) {
+            height: 9rem;
+        }
+    }
+
+    .detailPageWrapperContainer {
+        background: var(--cn-bg);
+    }
+
+    :is(.itemName.parentNameLast, h1.itemName) {
+        font-size: 1.7rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--cn-text);
+    }
+
+    .layout-desktop & h1.itemName {
+        font-size: 2.3rem;
+    }
+
+    .originalTitle {
+        font-weight: 500;
+        color: var(--cn-text-3);
+    }
+
+    .overview {
+        max-width: 60em;
+        line-height: 1.55;
+        color: var(--cn-text-2);
+    }
+
+    .tagline {
+        font-weight: 600;
+    }
+
+    .itemTags .button-link {
+        color: var(--cn-text-3);
+    }
+}
+
+/*
+ * No artwork (people, playlists): a short header instead of an empty band.
+ * Desktops show the page backdrop through the header, so an empty backdrop
+ * layer is the sign. It fills once the image has loaded; the transition
+ * above eases the header open then.
+ */
+html.layout-desktop:has(.backdropContainer:empty) .itemDetailPage {
+    .itemBackdrop {
+        height: calc(var(--cn-bar-h) + 15rem);
+    }
+
+    .detailLogo {
+        display: none;
+    }
+}
+
+html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContainer.withBackdrop {
+    opacity: 0.25;
+}
+
+.detailRibbon {
+    background: transparent;
+}
+
+.detailLogo {
+    filter: drop-shadow(0 4px 24px rgb(0 0 0 / 60%));
+}
+
+.detailImageContainer .card .cardScalable {
+    box-shadow: 0 20px 50px rgb(0 0 0 / 60%);
+}
+
+/*
+ * Desktop poster: Jellyfin gives it a quarter of the screen and indents the
+ * title and text past it. A smaller poster, and the indent follows it: the
+ * page gutter the poster sits in, its width, then a gap.
+ */
+.layout-desktop .detailImageContainer .card {
+    width: var(--cn-detail-poster);
+    max-width: none;
+}
+
+.layout-desktop [dir="ltr"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
+    padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
+}
+
+.layout-desktop [dir="rtl"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
+    padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
+}
+
+/* Actions: a white play pill, round glass buttons for the rest. Jellyfin
+   sets the padding and icon size of .detailButton with !important. */
+.mainDetailButtons {
+    gap: 0.6em;
+
+    .detailButton {
+        width: 2.9em;
+        height: 2.9em;
+        padding: 0 !important;
+        border-radius: 50%;
+        background: rgb(255 255 255 / 12%);
+        color: var(--cn-text);
+        transition:
+            background-color 0.2s,
+            transform 0.2s var(--cn-ease);
+
+        &:hover {
+            background: rgb(255 255 255 / 22%);
+            color: var(--cn-text);
+            transform: scale(1.06);
+        }
+    }
+
+    .detailButton-icon {
+        font-size: 1.45em !important;
+    }
+
+    .btnPlay {
+        width: auto;
+        padding: 0 1.5em !important;
+        border-radius: var(--cn-pill);
+        background: #fff;
+        color: #000;
+
+        &:hover {
+            background: rgb(255 255 255 / 85%);
+            color: #000;
+        }
+    }
+}
+
+.mediaInfoText {
+    border-color: var(--cn-text-3);
+    border-radius: 4px;
+}
