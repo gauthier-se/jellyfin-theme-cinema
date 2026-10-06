@@ -1,6 +1,11 @@
 /*! Cinema (cinematheque add-on) v0.1.0 for Jellyfin 12.1 | MIT | github.com/gauthier-se/jellyfin-theme-cinema */
+html .cinematheque {
+  padding-inline: var(--cn-gutter);
+}
+
 :is(.cinematheque, .cin-appbar) .cin-title {
   letter-spacing: -.01em;
+  margin-inline-start: -11px;
   font-weight: 700;
 }
 
@@ -64,14 +69,14 @@
 
 :is(.cinematheque, .cin-appbar) .cin-more {
   border-radius: var(--cn-pill);
-  background: #ffffff1a;
+  background: var(--cn-button);
   border: 0;
   padding: .65rem 1.6rem;
   font-weight: 600;
 }
 
 :is(.cinematheque, .cin-appbar) .cin-more:hover {
-  background: #ffffff2e;
+  background: var(--cn-button-hover);
 }
 
 :is(.cinematheque, .cin-appbar) .cin-progress-bar {

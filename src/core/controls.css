@@ -34,16 +34,17 @@ a[data-role="button"],
     border-radius: var(--cn-pill);
 }
 
+/* Form actions (Save, Add, Sign In) are the screen's primary action, the
+   same white pill as Play */
 .button-submit {
-    background: var(--cn-gradient-strong);
-    color: #fff;
+    background: var(--cn-primary);
+    color: var(--cn-on-primary);
     font-weight: 700;
 
     &:hover,
     &:focus {
-        background: var(--cn-gradient-strong);
-        color: #fff;
-        filter: brightness(1.12);
+        background: var(--cn-primary-hover);
+        color: var(--cn-on-primary);
     }
 }
 
@@ -64,8 +65,47 @@ a[data-role="button"],
     transition: background-color 600000s 0s;
 }
 
+/* Item page track pickers: Jellyfin sets the text against the field's edge */
+.trackSelections .selectContainer .detailTrackSelect {
+    padding: 0.2em 2em 0.2em 0.7em;
+}
+
 .checkboxOutline {
     border-radius: 6px;
+}
+
+/*
+ * Accents Jellyfin hard-codes. The html prefix outranks its rules, which come
+ * from its theme stylesheet and from bundles loaded after Custom CSS.
+ */
+html {
+    /* Watched and favourite toggles, red in Jellyfin: the accent marks what
+       is watched, the purple what is loved */
+    .playstatebutton-icon-played {
+        color: var(--cn-accent);
+    }
+
+    .ratingbutton-icon-withrating {
+        color: var(--cn-accent-2);
+    }
+
+    /* Sliders (seek, volume): Jellyfin's blue as a literal, not its palette */
+    .mdl-slider {
+        color: var(--cn-accent);
+
+        &::-webkit-slider-thumb {
+            background: var(--cn-accent);
+        }
+
+        &::-moz-range-thumb {
+            background: var(--cn-accent);
+        }
+    }
+
+    .mdl-slider-background-lower:not(.mdl-slider-background-lower-clear),
+    .sliderMarker.watched {
+        background-color: var(--cn-accent);
+    }
 }
 
 .searchFields {

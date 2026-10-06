@@ -68,6 +68,28 @@ html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) {
     }
 }
 
+/*
+ * Keyboard focus: a white ring, like tvOS. Jellyfin removes the outline of
+ * its buttons with !important and the theme's hover states never show under
+ * the keyboard, so nothing marked focus. Cards carry the ring on their
+ * artwork, which also covers the home tiles, whose link is invisible.
+ */
+body:not(.dashboardDocument)
+    :is(
+        .emby-button,
+        .paper-icon-button-light,
+        .textActionButton,
+        .MuiButtonBase-root.Mui-focusVisible
+    ):focus-visible {
+    outline: 2px solid var(--cn-text) !important;
+    outline-offset: 2px;
+}
+
+.cardScalable:has(.cardContent:focus-visible) {
+    outline: 2px solid var(--cn-text);
+    outline-offset: 2px;
+}
+
 /* Section titles */
 .sectionTitle-cards,
 .sectionTitle {

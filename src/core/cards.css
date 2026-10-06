@@ -139,9 +139,9 @@ html
         margin-top: -1.375rem;
         margin-left: -1.375rem;
         padding: 0;
-        background: rgb(255 255 255 / 18%);
+        background: var(--cn-disc);
         backdrop-filter: blur(10px);
-        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 35%);
+        box-shadow: inset 0 0 0 1px var(--cn-disc-rim);
         color: #fff;
         font-size: 1rem;
 
@@ -156,7 +156,7 @@ html
 /* Jellyfin paints a dark disc behind every overlay icon and sizes the icons,
    both with !important */
 .cardOverlayFab-primary .cardOverlayButtonIcon,
-.cardOverlayButton-br .cardOverlayButtonIcon {
+.cardOverlayContainer .cardOverlayButton-br .cardOverlayButtonIcon {
     background: transparent !important;
 }
 
@@ -166,7 +166,7 @@ html
 }
 
 /* Corner actions (watched, favourite, menu): smaller and quieter */
-.cardOverlayButton-br {
+.cardOverlayContainer .cardOverlayButton-br {
     .cardOverlayButton {
         padding: 0.3em;
     }
@@ -175,6 +175,14 @@ html
         font-size: 1.15rem !important;
         color: rgb(255 255 255 / 85%);
     }
+}
+
+/* Touch layouts show a lone play button in the corner instead, always on
+   and over bare artwork: it keeps a disc, in glass like the badges */
+.cardScalable > .cardOverlayButton-br .cardOverlayButtonIcon {
+    background: var(--cn-scrim) !important;
+    backdrop-filter: blur(10px);
+    color: #fff;
 }
 
 /* Captions: left aligned, quiet. Jellyfin centres them with !important. */
@@ -269,4 +277,35 @@ html
 .visualCardBox,
 .collapseContent {
     border-radius: var(--cn-radius);
+}
+
+/*
+ * Lists (episodes of a season, tracks with artwork): the thumbnail rounds
+ * like a card, and its play button is the cards' glass disc, at the same
+ * size, rather than Jellyfin's large dark one that turns blue.
+ */
+.listItemImage {
+    overflow: hidden;
+    border-radius: var(--cn-radius);
+}
+
+.listItemImageButton {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background: var(--cn-disc);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 0 1px var(--cn-disc-rim);
+    color: #fff;
+
+    .listItemImageButton-icon {
+        padding: 0;
+        font-size: 1.5rem;
+    }
+
+    &:hover {
+        background: #fff;
+        color: #000;
+        transform: scale(1.08);
+    }
 }

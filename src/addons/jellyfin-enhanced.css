@@ -22,12 +22,14 @@ body:not(.dashboardDocument) .MuiDrawer-paper .jellyfinEnhancedSection {
         color: var(--cn-text-3);
     }
 
+    /* Jellyfin sets the padding, margin and radius of .navMenuOption with
+       !important */
     .navMenuOption {
         display: flex;
         align-items: center;
-        margin: 1px 8px;
-        padding: 8px 16px !important; /* Jellyfin pads .navMenuOption with !important */
-        border-radius: var(--cn-radius-control);
+        margin: 1px 8px !important;
+        padding: 8px 16px !important;
+        border-radius: var(--cn-radius-control) !important;
         font-size: 1rem;
         color: var(--cn-text);
     }
