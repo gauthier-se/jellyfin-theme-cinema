@@ -1,4 +1,4 @@
-/*! Cinema (media-bar add-on) v0.1.0 for Jellyfin 12.1 | MIT | github.com/gauthier-se/jellyfin-theme-cinema */
+/*! Cinema (media-bar add-on) v0.2.0 for Jellyfin 12.1 | MIT | github.com/gauthier-se/jellyfin-theme-cinema */
 :root {
   --cn-hero-gap: 12px;
   --cn-hero-h: clamp(380px, 64vh, 760px);

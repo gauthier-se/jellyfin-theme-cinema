@@ -1,6 +1,6 @@
 {
   "name": "jellyfin-theme-cinema",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "A dark, quiet theme for the modern layout of Jellyfin 12",
   "license": "MIT",

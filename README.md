@@ -24,7 +24,7 @@ In **Dashboard > Branding > Custom CSS** (for every user) or **Settings > Displa
 (for yourself), paste:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.1.0/dist/cinema.min.css");
+@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.2.0/dist/cinema.min.css");
 ```
 
 Then save and reload the page. To remove it, clear the field and save.
@@ -51,21 +51,21 @@ plugin you have, after the theme's.
 as an inset card, and the page takes a faint tint of the slide's colours.
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.1.0/dist/addons/media-bar.min.css");
+@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.2.0/dist/addons/media-bar.min.css");
 ```
 
 **[Jellyfin Enhanced](https://github.com/n00bcodr/Jellyfin-Enhanced)** 12.x: its card tags step
 aside on hover, and its drawer entries line up with the rest.
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.1.0/dist/addons/jellyfin-enhanced.min.css");
+@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.2.0/dist/addons/jellyfin-enhanced.min.css");
 ```
 
 **[Cinematheque](https://github.com/gauthier-se/jellyfin-plugin-cinematheque)** 0.3: its tabs,
 tiles and inputs in line with the library pages.
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.1.0/dist/addons/cinematheque.min.css");
+@import url("https://cdn.jsdelivr.net/gh/gauthier-se/jellyfin-theme-cinema@v0.2.0/dist/addons/cinematheque.min.css");
 ```
 
 ## Customise
