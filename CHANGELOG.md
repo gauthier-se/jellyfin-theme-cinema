@@ -8,6 +8,29 @@ a patch for fixes.
 
 ## [Unreleased]
 
+### Added
+
+- `--cn-blur-sm`, the blur of small glass (play discs, badges, round buttons, tooltips), and
+  `--cn-field-focus`, the edge of a focused field.
+
+### Changed
+
+- Home: My Media and the Live TV shortcuts form a grid instead of a scrolling row, so every
+  shortcut is in view. A row a tile or two short of full shares out its width instead of showing
+  a gap; past a full row the tiles wrap. Phones show two columns of shorter tiles. Narrow windows
+  and tablets take four columns, not five, and `--cn-tile-min` is now 120px.
+- The drawer, the sign-in card and toasts take the panels' blur (`--cn-blur`).
+
+### Fixed
+
+- Phones: on pages without artwork (people, albums, playlists), the poster slid under the top bar.
+  It now sits beside the title, below the bar.
+- Opening a menu no longer widens the Media Bar hero where scrollbars take room (Windows, or macOS
+  with a mouse): the page keeps its scrollbar's gutter.
+- Menus, action sheets, dialogs and toasts no longer restyle the dashboard, which keeps Jellyfin's
+  own look like the rest of its overlays.
+- The keyboard ring on cards in the TV layout follows `--cn-text`, like every other focus ring.
+
 ## [0.2.0] - 2026-10-06
 
 ### Added

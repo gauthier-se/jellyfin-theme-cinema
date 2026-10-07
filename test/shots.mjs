@@ -72,6 +72,16 @@ for (const [viewport, options] of Object.entries(VIEWPORTS)) {
         if (!todo.length) continue;
 
         const context = await browser.newContext({ ...options, baseURL: credentials.url });
+        // Headless Chromium hides its scrollbars yet still reserves their
+        // gutter for scrollbar-gutter, where overlay scrollbars (a Mac with a
+        // trackpad, phones) reserve none. Shoot what those show.
+        await context.addInitScript(() => {
+            document.addEventListener("DOMContentLoaded", () => {
+                const style = document.createElement("style");
+                style.textContent = "html { scrollbar-gutter: auto !important; }";
+                document.head.append(style);
+            });
+        });
         const page = await context.newPage();
         if (!anonymous) await signIn(page);
 

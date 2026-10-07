@@ -28,6 +28,7 @@
     --cn-selected: rgb(255 255 255 / 16%);
     --cn-field: rgb(255 255 255 / 5%);
     --cn-field-line: rgb(255 255 255 / 10%);
+    --cn-field-focus: rgb(255 255 255 / 50%);
     --cn-scrim: rgb(0 0 0 / 55%);
     --cn-track: rgb(255 255 255 / 28%);
 
@@ -62,6 +63,10 @@
     --cn-raised: rgb(48 48 48 / 92%);
     --cn-blur: saturate(180%) blur(24px);
 
+    /* Small glass laid on artwork or the bar: discs, badges, round buttons,
+       tooltips */
+    --cn-blur-sm: blur(12px);
+
     /* Shape. Panels (menus, dialogs, the sign-in card) take --cn-radius-lg:
        their items' --cn-radius plus the 6px padding around them. */
     --cn-radius: 8px;
@@ -85,9 +90,9 @@
 
     /* Home tiles (My Media, Live TV): one size for both rows. A tile is one
        of --cn-tile-columns columns across the row, never under
-       --cn-tile-min; past that the row scrolls. */
+       --cn-tile-min; past a full row the tiles wrap (home.css). */
     --cn-tile-columns: 7;
-    --cn-tile-min: 140px;
+    --cn-tile-min: 120px;
     --cn-tile-gap: 18px;
     --cn-tile-h: clamp(6rem, 6.8vw, 8.5rem);
     --cn-tile-font: clamp(1.1rem, 0.85rem + 0.45vw, 1.3rem);
@@ -107,10 +112,20 @@
     --cn-bar-h: 64px;
 }
 
-/* Tablets and narrow windows: fewer, larger home tiles */
+/* Tablets and narrow windows: fewer, larger home tiles. Four, not five:
+   Live TV always has six shortcuts, and 5 + 1 would strand one. */
 @media (width < 1200px) {
     :root {
-        --cn-tile-columns: 5;
+        --cn-tile-columns: 4;
+    }
+}
+
+/* Phones: two columns of short tiles, so the shortcuts take little height */
+@media (width < 600px) {
+    :root {
+        --cn-tile-columns: 2;
+        --cn-tile-gap: 10px;
+        --cn-tile-h: 52px;
     }
 }
 

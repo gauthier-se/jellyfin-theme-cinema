@@ -43,6 +43,14 @@ const click = (selector) => async (page) => {
     await page.waitForTimeout(800);
 };
 
+// The Live TV row shows only while a programme airs: the seed's guide runs
+// 11 hours from seeding, so run `npm run server:seed` again past that.
+const liveTvRow = async (page) => {
+    await open("#/home", 8000)(page);
+    await page.locator('a.raised[href*="livetv?tab="]').first().scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1000);
+};
+
 const toolbarButton = (icon) =>
     `.MuiAppBar-root .MuiToolbar-root + .MuiToolbar-root button:has(svg[data-testid="${icon}"])`;
 
@@ -63,6 +71,7 @@ export const screens = [
             await page.waitForTimeout(1500);
         },
     },
+    { name: "home-livetv", viewport: "desktop", visit: liveTvRow },
     {
         name: "card-hover",
         viewport: "desktop",
@@ -177,6 +186,7 @@ export const screens = [
             await page.waitForTimeout(1500);
         },
     },
+    { name: "mobile-home-livetv", viewport: "mobile", visit: liveTvRow },
     { name: "mobile-drawer", viewport: "mobile", visit: click(".MuiAppBar-root button") },
     {
         name: "mobile-movies",
@@ -187,6 +197,12 @@ export const screens = [
         name: "mobile-series",
         viewport: "mobile",
         visit: (page, ids) => open(details(ids.series, ids))(page),
+    },
+    {
+        // No backdrop: the portrait sits at the top of the page, under the bar
+        name: "mobile-person",
+        viewport: "mobile",
+        visit: (page, ids) => open(details(ids.person, ids))(page),
     },
     { name: "mobile-search", viewport: "mobile", visit: open("#/search?query=the", 4000) },
 ];
