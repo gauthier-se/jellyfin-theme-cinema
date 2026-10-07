@@ -85,6 +85,6 @@ html .cinematheque {
 
 :is(.cinematheque, .cin-appbar) .cin-seen-badge {
   background: var(--cn-scrim);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
 }

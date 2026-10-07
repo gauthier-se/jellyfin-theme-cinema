@@ -214,7 +214,7 @@ html:not(.layout-tv) #slides-container {
         padding: 0 1.4rem 0 1.1rem !important;
         border: 0;
         background: rgb(109 109 110 / 62%);
-        backdrop-filter: blur(12px);
+        backdrop-filter: var(--cn-blur-sm);
 
         &:hover {
             background: rgb(109 109 110 / 85%);
@@ -229,7 +229,7 @@ html:not(.layout-tv) #slides-container {
         width: 2.9rem;
         border: 0;
         background: var(--cn-button);
-        backdrop-filter: blur(12px);
+        backdrop-filter: var(--cn-blur-sm);
 
         &:hover {
             background: var(--cn-button-hover);
@@ -259,7 +259,7 @@ html:not(.layout-tv) #slides-container {
 
     .arrow {
         background: var(--cn-button);
-        backdrop-filter: blur(12px);
+        backdrop-filter: var(--cn-blur-sm);
     }
 
     /* Pointer devices: the synopsis and buttons wait for hover or focus.

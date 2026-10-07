@@ -52,6 +52,27 @@ html {
 }
 
 /*
+ * Menus and dialogs lock the page's scroll, which hides a classic scrollbar
+ * (Windows, or macOS with a mouse) and widens the page. MUI pads the body
+ * and its fixed bars by the scrollbar's width to make up for it, but the
+ * Media Bar hero, laid on the viewport, still grows. The page keeps the
+ * scrollbar's gutter instead, locked or not; MUI's padding would then push
+ * the page aside, so it goes. Not during playback, where the video would
+ * stop short of the gutter, nor on the dashboard.
+ */
+@supports (scrollbar-gutter: stable) {
+    html:not(.transparentDocument, :has(> body.dashboardDocument)) {
+        scrollbar-gutter: stable;
+
+        /* MUI sets it inline */
+        > body[style*="padding-right"],
+        .mui-fixed[style*="padding-right"] {
+            padding-right: 0 !important;
+        }
+    }
+}
+
+/*
  * Display > Backdrops paints a random film behind every page (Jellyfin
  * Tweaks can turn it on for everyone). Keep the canvas black, except on item
  * pages, where the artwork is the hero, and during playback: the video sits

@@ -4,65 +4,69 @@
  * at its body class, since it keeps Jellyfin's own look.
  */
 
-/* Menus and action sheets: frosted panels */
-.MuiPopover-paper,
-.MuiMenu-paper,
-.actionSheet {
-    background-color: var(--cn-menu);
-    background-image: none;
-    backdrop-filter: var(--cn-blur);
-    border: 1px solid var(--cn-line);
-    border-radius: var(--cn-radius-lg);
-    box-shadow: 0 20px 50px rgb(0 0 0 / 50%);
-}
+/*
+ * Menus and action sheets: frosted panels. Their items sit inside the
+ * panel's padding with a smaller, concentric radius. MUI menus are popovers,
+ * so .MuiPopover-paper covers both.
+ */
+body:not(.dashboardDocument) {
+    :is(.MuiPopover-paper, .actionSheet) {
+        background-color: var(--cn-menu);
+        background-image: none;
+        backdrop-filter: var(--cn-blur);
+        border: 1px solid var(--cn-line);
+        border-radius: var(--cn-radius-lg);
+        box-shadow: 0 20px 50px rgb(0 0 0 / 50%);
+    }
 
-/* Jellyfin squares action sheets with !important, in every page bundle */
-.actionSheet:not(.actionsheet-fullscreen) {
-    border-radius: var(--cn-radius-lg) !important;
-}
+    /* Jellyfin squares action sheets with !important, in every page bundle */
+    .actionSheet:not(.actionsheet-fullscreen) {
+        border-radius: var(--cn-radius-lg) !important;
+    }
 
-/* Items sit inside the panel's padding with a smaller, concentric radius */
-body:not(.dashboardDocument) .MuiMenu-list {
-    padding: 6px;
+    /* Full-screen action sheets (phones) are pages, not floating panels */
+    .actionsheet-fullscreen {
+        border: 0;
+        border-radius: 0;
+        background-color: var(--cn-bg);
+    }
 
-    :is(.MuiMenuItem-root, .MuiListItemButton-root) {
+    :is(.MuiMenu-list, .actionSheetScroller) {
+        padding: 6px;
+    }
+
+    :is(
+        .MuiMenu-list .MuiMenuItem-root,
+        .MuiMenu-list .MuiListItemButton-root,
+        .actionSheetMenuItem
+    ) {
         border-radius: var(--cn-radius);
     }
-}
 
-.actionSheetScroller {
-    padding: 6px;
-}
+    .actionsheetDivider {
+        margin: 6px 4px;
+    }
 
-.actionSheetMenuItem {
-    border-radius: var(--cn-radius);
-}
+    .MuiTooltip-tooltip {
+        padding: 6px 10px;
+        border-radius: var(--cn-radius);
+        background: var(--cn-raised);
+        backdrop-filter: var(--cn-blur-sm);
+        box-shadow: 0 6px 20px rgb(0 0 0 / 35%);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
 
-.actionsheetDivider {
-    margin: 6px 4px;
-}
+    :is(.MuiDialog-paper, .dialog:not(.dialog-fullscreen)) {
+        border-radius: var(--cn-radius-lg);
+        background-image: none;
+    }
 
-/* Full-screen action sheets (phones) are pages, not floating panels */
-.actionsheet-fullscreen {
-    border: 0;
-    border-radius: 0;
-    background-color: var(--cn-bg);
-}
-
-body:not(.dashboardDocument) .MuiTooltip-tooltip {
-    padding: 6px 10px;
-    border-radius: var(--cn-radius);
-    background: var(--cn-raised);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 6px 20px rgb(0 0 0 / 35%);
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.MuiDialog-paper,
-.dialog:not(.dialog-fullscreen) {
-    border-radius: var(--cn-radius-lg);
-    background-image: none;
+    .toast {
+        border-radius: var(--cn-pill);
+        background: var(--cn-raised);
+        backdrop-filter: var(--cn-blur);
+    }
 }
 
 /* Now playing (music): the bar at the foot of every page, frosted like the
@@ -88,17 +92,11 @@ html body:not(.dashboardDocument) .appfooter {
     }
 }
 
-.toast {
-    border-radius: var(--cn-pill);
-    background: var(--cn-raised);
-    backdrop-filter: blur(20px);
-}
-
 /* Drawer (phones and narrow windows) */
 body:not(.dashboardDocument) .MuiDrawer-paper {
     background-color: rgb(var(--cn-bg-rgb) / 92%);
     background-image: none;
-    backdrop-filter: saturate(160%) blur(24px);
+    backdrop-filter: var(--cn-blur);
     border-right: 1px solid var(--cn-line);
     box-shadow: 20px 0 60px rgb(0 0 0 / 40%);
 

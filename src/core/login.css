@@ -19,7 +19,7 @@ html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
         border: 1px solid var(--cn-line);
         border-radius: var(--cn-radius-lg);
         background: rgb(var(--cn-surface-rgb) / 72%);
-        backdrop-filter: saturate(160%) blur(24px);
+        backdrop-filter: var(--cn-blur);
         box-shadow: 0 30px 80px rgb(0 0 0 / 45%);
     }
 
@@ -65,7 +65,7 @@ html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
             box-shadow 0.2s;
 
         &:focus {
-            border-color: rgb(255 255 255 / 55%);
+            border-color: var(--cn-field-focus);
             box-shadow: 0 0 0 3px var(--cn-hover);
         }
     }

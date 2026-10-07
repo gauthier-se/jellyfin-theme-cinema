@@ -1,39 +1,46 @@
 /*
- * Home: My Media and the Live TV shortcuts as plain tiles of one size. Each
- * row's scroller is a size container, so 100cqw is the row's width and a
- * tile is one of --cn-tile-columns columns across it, whatever the number
- * of tiles in the row. A shorter row ends early rather than stretching.
- */
-.homeSectionsContainer
-    .emby-scroller:has(.card[data-type="CollectionFolder"], a.raised[href*="livetv?tab="]) {
-    --cn-tile-w: max(
-        var(--cn-tile-min),
-        (100cqw - (var(--cn-tile-columns) - 1) * var(--cn-tile-gap)) / var(--cn-tile-columns)
-    );
-
-    container-type: inline-size;
-}
-
-/*
+ * Home: My Media and the Live TV shortcuts as plain tiles of one size, in a
+ * grid instead of Jellyfin's scrolling row, so every shortcut is in view. A
+ * tile takes one of --cn-tile-columns columns, never under --cn-tile-min.
+ * A row a tile or two short of full shares the width out (auto-fit) rather
+ * than look like it lost one; past a full row, the tiles wrap. Three or
+ * fewer keep the column width and the row ends early.
+ *
  * My Media is the only home row holding CollectionFolder cards, so the row
  * is found through them. That way Playlists and Live TV, which are
  * UserViews, get the same tile as the libraries.
  */
+.homeSectionsContainer
+    .scrollSlider:has(> .card[data-type="CollectionFolder"], > a.raised[href*="livetv?tab="]) {
+    --cn-tile-w: max(
+        var(--cn-tile-min),
+        (100% - (var(--cn-tile-columns) - 1) * var(--cn-tile-gap)) / var(--cn-tile-columns)
+    );
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--cn-tile-w), 1fr));
+    gap: var(--cn-tile-gap);
+
+    /* Live TV's .padded-top and .padded-bottom, for My Media too */
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+    &:not(:has(> :nth-child(4))) {
+        grid-template-columns: repeat(auto-fill, minmax(var(--cn-tile-w), 1fr));
+    }
+}
+
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) {
-    .scrollSlider {
-        display: flex;
-        gap: var(--cn-tile-gap);
-    }
-
+    /* Jellyfin sizes overflow cards on the viewport; the grid sizes these */
     .card {
-        flex: none;
-        width: var(--cn-tile-w);
+        width: auto;
     }
 
+    /* Its margins would open the gaps between wrapped rows. Jellyfin sets
+       .cardBox-bottompadded's with !important on narrow screens. */
     .cardBox {
         position: relative;
-        margin-right: 0;
-        margin-left: 0;
+        margin: 0 !important;
     }
 
     .cardPadder {
@@ -61,16 +68,20 @@
         display: none;
     }
 
-    /* Centred over the cards' left alignment, which is !important */
+    /* Centred over the cards' left alignment, which is !important. A long
+       name wraps rather than cut off. */
     .cardText {
         position: absolute;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 0 1rem;
         font-size: var(--cn-tile-font);
         font-weight: 600;
         text-align: center !important;
+        text-wrap: balance;
+        white-space: normal;
         pointer-events: none;
     }
 }
@@ -83,33 +94,27 @@
 }
 
 /* Live TV shortcuts, as the same tile */
-.homeSectionsContainer {
-    .scrollSlider:has(> a.raised[href*="livetv?tab="]) {
-        display: flex;
-        gap: var(--cn-tile-gap);
-    }
+.homeSectionsContainer a.raised[href*="livetv?tab="] {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--cn-tile-h);
+    margin: 0;
+    padding: 0 1rem;
+    border-radius: var(--cn-radius);
+    background: var(--cn-surface);
+    box-shadow: none;
+    color: var(--cn-text);
+    font-size: var(--cn-tile-font);
+    font-weight: 600;
+    text-align: center;
+    text-wrap: balance;
+    white-space: normal;
+    transition: background-color 0.35s var(--cn-ease);
 
-    a.raised[href*="livetv?tab="] {
-        box-sizing: border-box;
-        display: flex;
-        flex: none;
-        align-items: center;
-        justify-content: center;
-        width: var(--cn-tile-w);
-        height: var(--cn-tile-h);
-        margin: 0;
-        padding: 0 1rem;
-        border-radius: var(--cn-radius);
-        background: var(--cn-surface);
-        box-shadow: none;
-        color: var(--cn-text);
-        font-size: var(--cn-tile-font);
-        font-weight: 600;
-        transition: background-color 0.35s var(--cn-ease);
-
-        &:hover {
-            background: var(--cn-surface-hover);
-            transition-delay: 0.08s;
-        }
+    &:hover {
+        background: var(--cn-surface-hover);
+        transition-delay: 0.08s;
     }
 }

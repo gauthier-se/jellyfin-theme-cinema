@@ -23,7 +23,7 @@
 
     &::before {
         inset: 0 0 -40px;
-        backdrop-filter: blur(12px);
+        backdrop-filter: var(--cn-blur-sm);
         mask-image: linear-gradient(
             to bottom,
             #000 0%,

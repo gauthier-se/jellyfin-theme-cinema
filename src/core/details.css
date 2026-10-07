@@ -29,12 +29,6 @@
                 );
             pointer-events: none;
         }
-
-        /* Phones paint the artwork on this element; no URL once it has
-           loaded (no lazy-hidden left) means the item has none */
-        .layout-mobile &:not(.lazy-hidden, [style*="url("]) {
-            height: 9rem;
-        }
     }
 
     .detailPageWrapperContainer {
@@ -85,6 +79,54 @@ html.layout-desktop:has(.backdropContainer:empty) .itemDetailPage {
 
     .detailLogo {
         display: none;
+    }
+}
+
+/*
+ * No artwork on a phone. Phones paint the artwork on .itemBackdrop: no URL
+ * once it has loaded (no lazy-hidden left) means the item has none. Jellyfin
+ * still hangs the poster from the title, up into that band, so on a short
+ * band it slides under the top bar. The poster joins the flow instead,
+ * beside the title, and the band keeps the bar's height: with the ribbon's
+ * own .5rem, the poster sits 1rem below the bar, about the side gutter.
+ */
+html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="url("])) {
+    .itemBackdrop {
+        height: calc(var(--cn-bar-h) + 0.5rem);
+    }
+
+    /* The title's row takes the height the poster adds, and the title sits
+       at its foot, so the two end level as they do over artwork */
+    .infoWrapper {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: 1rem;
+        padding-right: 0;
+        padding-left: 0;
+
+        > * {
+            grid-column: 2;
+        }
+
+        > .detailImageContainer {
+            grid-row: 1 / span 3;
+            grid-column: 1;
+            align-self: end;
+        }
+    }
+
+    .nameContainer {
+        align-self: end;
+    }
+
+    /* Jellyfin's phone size: a third of the screen, less on wider ones */
+    .infoWrapper .card {
+        position: relative;
+        inset: auto;
+        float: none;
+        width: min(30vw, var(--cn-detail-poster));
+        max-width: none;
     }
 }
 

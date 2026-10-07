@@ -13,6 +13,7 @@
   --cn-selected: #ffffff29;
   --cn-field: #ffffff0d;
   --cn-field-line: #ffffff1a;
+  --cn-field-focus: #ffffff80;
   --cn-scrim: #0000008c;
   --cn-track: #ffffff47;
   --cn-button: #ffffff24;
@@ -33,6 +34,7 @@
   --cn-menu: #262626eb;
   --cn-raised: #303030eb;
   --cn-blur: saturate(180%) blur(24px);
+  --cn-blur-sm: blur(12px);
   --cn-radius: 8px;
   --cn-radius-control: 10px;
   --cn-radius-lg: 14px;
@@ -43,7 +45,7 @@
   --cn-detail-poster: clamp(11.5rem, 14vw, 17rem);
   --cn-detail-header: clamp(15rem, 40vh, 30rem);
   --cn-tile-columns: 7;
-  --cn-tile-min: 140px;
+  --cn-tile-min: 120px;
   --cn-tile-gap: 18px;
   --cn-tile-h: clamp(6rem, 6.8vw, 8.5rem);
   --cn-tile-font: clamp(1.1rem, .85rem + .45vw, 1.3rem);
@@ -60,7 +62,15 @@
 
 @media not (min-width: 1200px) {
   :root {
-    --cn-tile-columns: 5;
+    --cn-tile-columns: 4;
+  }
+}
+
+@media not (min-width: 600px) {
+  :root {
+    --cn-tile-columns: 2;
+    --cn-tile-gap: 10px;
+    --cn-tile-h: 52px;
   }
 }
 
@@ -119,6 +129,16 @@ html {
   background: #ffffff2e;
 }
 
+@supports (scrollbar-gutter: stable) {
+  html:not(.transparentDocument, :has( > body.dashboardDocument)) {
+    scrollbar-gutter: stable;
+  }
+
+  html:not(.transparentDocument, :has( > body.dashboardDocument)) > body[style*="padding-right"], html:not(.transparentDocument, :has( > body.dashboardDocument)) .mui-fixed[style*="padding-right"] {
+    padding-right: 0 !important;
+  }
+}
+
 html:not(.transparentDocument, :has(.itemDetailPage:not(.hide))) .backdropContainer {
   display: none;
 }
@@ -162,8 +182,8 @@ body:not(.dashboardDocument) :is(.emby-button, .paper-icon-button-light, .textAc
 }
 
 .MuiAppBar-root:before {
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
   inset: 0 0 -40px;
   -webkit-mask-image: linear-gradient(#000 0% 45%, #00000080 70%, #0000 100%);
   mask-image: linear-gradient(#000 0% 45%, #00000080 70%, #0000 100%);
@@ -334,7 +354,7 @@ body:not(.dashboardDocument) :is(.emby-button, .paper-icon-button-light, .textAc
   background-color: #ffffff1a;
 }
 
-.MuiPopover-paper, .MuiMenu-paper, .actionSheet {
+body:not(.dashboardDocument) :is(.MuiPopover-paper, .actionSheet) {
   background-color: var(--cn-menu);
   -webkit-backdrop-filter: var(--cn-blur);
   backdrop-filter: var(--cn-blur);
@@ -344,50 +364,49 @@ body:not(.dashboardDocument) :is(.emby-button, .paper-icon-button-light, .textAc
   box-shadow: 0 20px 50px #00000080;
 }
 
-.actionSheet:not(.actionsheet-fullscreen) {
+body:not(.dashboardDocument) .actionSheet:not(.actionsheet-fullscreen) {
   border-radius: var(--cn-radius-lg) !important;
 }
 
-body:not(.dashboardDocument) .MuiMenu-list {
-  padding: 6px;
-}
-
-body:not(.dashboardDocument) .MuiMenu-list :is(.MuiMenuItem-root, .MuiListItemButton-root) {
-  border-radius: var(--cn-radius);
-}
-
-.actionSheetScroller {
-  padding: 6px;
-}
-
-.actionSheetMenuItem {
-  border-radius: var(--cn-radius);
-}
-
-.actionsheetDivider {
-  margin: 6px 4px;
-}
-
-.actionsheet-fullscreen {
+body:not(.dashboardDocument) .actionsheet-fullscreen {
   background-color: var(--cn-bg);
   border: 0;
   border-radius: 0;
 }
 
+body:not(.dashboardDocument) :is(.MuiMenu-list, .actionSheetScroller) {
+  padding: 6px;
+}
+
+body:not(.dashboardDocument) :is(.MuiMenu-list .MuiMenuItem-root, .MuiMenu-list .MuiListItemButton-root, .actionSheetMenuItem) {
+  border-radius: var(--cn-radius);
+}
+
+body:not(.dashboardDocument) .actionsheetDivider {
+  margin: 6px 4px;
+}
+
 body:not(.dashboardDocument) .MuiTooltip-tooltip {
   border-radius: var(--cn-radius);
   background: var(--cn-raised);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
   padding: 6px 10px;
   font-size: .8rem;
   font-weight: 500;
   box-shadow: 0 6px 20px #00000059;
 }
 
-.MuiDialog-paper, .dialog:not(.dialog-fullscreen) {
+body:not(.dashboardDocument) :is(.MuiDialog-paper, .dialog:not(.dialog-fullscreen)) {
   border-radius: var(--cn-radius-lg);
   background-image: none;
+}
+
+body:not(.dashboardDocument) .toast {
+  border-radius: var(--cn-pill);
+  background: var(--cn-raised);
+  -webkit-backdrop-filter: var(--cn-blur);
+  backdrop-filter: var(--cn-blur);
 }
 
 html body:not(.dashboardDocument) .appfooter {
@@ -409,17 +428,10 @@ html body:not(.dashboardDocument) .appfooter .nowPlayingBarSecondaryText {
   color: var(--cn-text-3);
 }
 
-.toast {
-  border-radius: var(--cn-pill);
-  background: var(--cn-raised);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-}
-
 body:not(.dashboardDocument) .MuiDrawer-paper {
   background-color: rgb(var(--cn-bg-rgb) / 92%);
-  -webkit-backdrop-filter: saturate(160%) blur(24px);
-  backdrop-filter: saturate(160%) blur(24px);
+  -webkit-backdrop-filter: var(--cn-blur);
+  backdrop-filter: var(--cn-blur);
   border-right: 1px solid var(--cn-line);
   background-image: none;
   box-shadow: 20px 0 60px #0006;
@@ -553,7 +565,7 @@ html .mdl-slider-background-lower:not(.mdl-slider-background-lower-clear), html 
 }
 
 .searchFields .searchfields-txtSearch:focus {
-  border-color: #ffffff80;
+  border-color: var(--cn-field-focus);
 }
 
 .searchFields .searchfields-icon {
@@ -651,23 +663,26 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary {
-  background: var(--cn-disc);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  width: 2.75rem;
-  height: 2.75rem;
-  box-shadow: inset 0 0 0 1px var(--cn-disc-rim);
-  color: #fff;
   justify-content: center;
   align-items: center;
   margin-top: -1.375rem;
   margin-left: -1.375rem;
-  padding: 0;
   font-size: 1rem;
   display: flex;
 }
 
-.cardOverlayContainer > .cardOverlayFab-primary:hover {
+:is(.cardOverlayContainer > .cardOverlayFab-primary, .listItemImageButton) {
+  background: var(--cn-disc);
+  width: 2.75rem;
+  height: 2.75rem;
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
+  box-shadow: inset 0 0 0 1px var(--cn-disc-rim);
+  color: #fff;
+  padding: 0;
+}
+
+:is(.cardOverlayContainer > .cardOverlayFab-primary, .listItemImageButton):hover {
   color: #000;
   background: #fff;
   transform: scale(1.08);
@@ -692,8 +707,8 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 }
 
 .cardScalable > .cardOverlayButton-br .cardOverlayButtonIcon {
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
   color: #fff;
   background: var(--cn-scrim) !important;
 }
@@ -719,8 +734,8 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 
 .playedIndicator, .countIndicator {
   background: var(--cn-scrim);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
   color: #fff;
 }
 
@@ -754,7 +769,7 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 }
 
 .card.show-focus:focus .cardBox:not(.visualCardBox) .cardScalable {
-  border-color: #fff !important;
+  border-color: var(--cn-text) !important;
 }
 
 .personCard :is(.cardScalable, .cardPadder, .cardImageContainer, .cardOverlayContainer, .blurhash-canvas) {
@@ -782,48 +797,32 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   overflow: hidden;
 }
 
-.listItemImageButton {
-  background: var(--cn-disc);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  width: 2.75rem;
-  height: 2.75rem;
-  box-shadow: inset 0 0 0 1px var(--cn-disc-rim);
-  color: #fff;
-  padding: 0;
-}
-
 .listItemImageButton .listItemImageButton-icon {
   padding: 0;
   font-size: 1.5rem;
 }
 
-.listItemImageButton:hover {
-  color: #000;
-  background: #fff;
-  transform: scale(1.08);
-}
-
-.homeSectionsContainer .emby-scroller:has(.card[data-type="CollectionFolder"], a.raised[href*="livetv?tab="]) {
+.homeSectionsContainer .scrollSlider:has( > .card[data-type="CollectionFolder"],  > a.raised[href*="livetv?tab="]) {
   --cn-tile-w: max(var(--cn-tile-min),
-        (100cqw - (var(--cn-tile-columns) - 1) * var(--cn-tile-gap)) / var(--cn-tile-columns));
-  container-type: inline-size;
+        (100% - (var(--cn-tile-columns) - 1) * var(--cn-tile-gap)) / var(--cn-tile-columns));
+  grid-template-columns: repeat(auto-fit, minmax(var(--cn-tile-w), 1fr));
+  gap: var(--cn-tile-gap);
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: grid;
 }
 
-.homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) .scrollSlider {
-  gap: var(--cn-tile-gap);
-  display: flex;
+.homeSectionsContainer .scrollSlider:has( > .card[data-type="CollectionFolder"],  > a.raised[href*="livetv?tab="]):not(:has( > :nth-child(4))) {
+  grid-template-columns: repeat(auto-fill, minmax(var(--cn-tile-w), 1fr));
 }
 
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) .card {
-  width: var(--cn-tile-w);
-  flex: none;
+  width: auto;
 }
 
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) .cardBox {
-  margin-left: 0;
-  margin-right: 0;
   position: relative;
+  margin: 0 !important;
 }
 
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) .cardPadder {
@@ -852,9 +851,12 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) .cardText {
   font-size: var(--cn-tile-font);
+  text-wrap: balance;
+  white-space: normal;
   pointer-events: none;
   justify-content: center;
   align-items: center;
+  padding: 0 1rem;
   font-weight: 600;
   display: flex;
   position: absolute;
@@ -868,22 +870,18 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   font-weight: 600;
 }
 
-.homeSectionsContainer .scrollSlider:has( > a.raised[href*="livetv?tab="]) {
-  gap: var(--cn-tile-gap);
-  display: flex;
-}
-
 .homeSectionsContainer a.raised[href*="livetv?tab="] {
   box-sizing: border-box;
-  width: var(--cn-tile-w);
   height: var(--cn-tile-h);
   border-radius: var(--cn-radius);
   background: var(--cn-surface);
   box-shadow: none;
   color: var(--cn-text);
   font-size: var(--cn-tile-font);
+  text-align: center;
+  text-wrap: balance;
+  white-space: normal;
   transition: background-color .35s var(--cn-ease);
-  flex: none;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -915,10 +913,6 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   pointer-events: none;
   position: absolute;
   inset: 0;
-}
-
-.layout-mobile :is(.itemDetailPage .itemBackdrop):not(.lazy-hidden, [style*="url("]) {
-  height: 9rem;
 }
 
 .itemDetailPage .detailPageWrapperContainer {
@@ -961,6 +955,40 @@ html.layout-desktop:has(.backdropContainer:empty) .itemDetailPage .itemBackdrop 
 
 html.layout-desktop:has(.backdropContainer:empty) .itemDetailPage .detailLogo {
   display: none;
+}
+
+html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="url("])) .itemBackdrop {
+  height: calc(var(--cn-bar-h) + .5rem);
+}
+
+html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="url("])) .infoWrapper {
+  grid-template-rows: 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1rem;
+  padding-left: 0;
+  padding-right: 0;
+  display: grid;
+}
+
+html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="url("])) .infoWrapper > * {
+  grid-column: 2;
+}
+
+html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="url("])) .infoWrapper > .detailImageContainer {
+  grid-area: 1 / 1 / span 3;
+  align-self: end;
+}
+
+html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="url("])) .nameContainer {
+  align-self: end;
+}
+
+html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="url("])) .infoWrapper .card {
+  float: none;
+  width: min(30vw, var(--cn-detail-poster));
+  max-width: none;
+  position: relative;
+  inset: auto;
 }
 
 html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContainer.withBackdrop {
@@ -1048,9 +1076,9 @@ html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
   border: 1px solid var(--cn-line);
   border-radius: var(--cn-radius-lg);
   background: rgb(var(--cn-surface-rgb) / 72%);
-  -webkit-backdrop-filter: saturate(160%) blur(24px);
-  backdrop-filter: saturate(160%) blur(24px);
   width: min(25rem, 100% - 2em);
+  -webkit-backdrop-filter: var(--cn-blur);
+  backdrop-filter: var(--cn-blur);
   margin: auto;
   box-shadow: 0 30px 80px #00000073;
   padding: 2.25rem 2.25rem 1.5rem !important;
@@ -1096,8 +1124,8 @@ html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
 }
 
 #loginPage .emby-input:focus {
+  border-color: var(--cn-field-focus);
   box-shadow: 0 0 0 3px var(--cn-hover);
-  border-color: #ffffff8c;
 }
 
 #loginPage .checkboxContainer {

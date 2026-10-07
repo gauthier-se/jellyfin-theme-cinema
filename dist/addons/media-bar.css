@@ -172,13 +172,13 @@ html:not(.layout-tv) #slides-container .play-button:hover {
 }
 
 html:not(.layout-tv) #slides-container .detail-button {
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  width: auto;
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
   background: #6d6d6e9e;
   border: 0;
   flex-direction: row;
   gap: .45rem;
-  width: auto;
   padding: 0 1.4rem 0 1.1rem !important;
 }
 
@@ -192,10 +192,10 @@ html:not(.layout-tv) #slides-container .detail-button .action-label {
 
 html:not(.layout-tv) #slides-container .favorite-button {
   background: var(--cn-button);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border: 0;
   width: 2.9rem;
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
+  border: 0;
 }
 
 html:not(.layout-tv) #slides-container .favorite-button:hover {
@@ -224,8 +224,8 @@ html:not(.layout-tv) #slides-container .ss-chrome i {
 
 html:not(.layout-tv) #slides-container .arrow {
   background: var(--cn-button);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: var(--cn-blur-sm);
+  backdrop-filter: var(--cn-blur-sm);
 }
 
 @media (hover: hover) and (pointer: fine) {
