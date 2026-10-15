@@ -22,7 +22,7 @@ export const entries = [
 
 const banner = (entry) =>
     `/*! Cinema ${entry === "cinema.css" ? "" : `(${basename(entry, ".css")} add-on) `}` +
-    `v${pkg.version} for Jellyfin 12.1 | MIT | github.com/gauthier-se/jellyfin-theme-cinema */\n`;
+    `v${pkg.version} for Jellyfin 12.1 and 12.2 | MIT | github.com/gauthier-se/jellyfin-theme-cinema */\n`;
 
 function compile(entry, minify) {
     const { code, warnings } = bundle({

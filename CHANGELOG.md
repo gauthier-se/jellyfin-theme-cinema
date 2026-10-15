@@ -30,6 +30,9 @@ a patch for fixes.
 - Menus, action sheets, dialogs and toasts no longer restyle the dashboard, which keeps Jellyfin's
   own look like the rest of its overlays.
 - The keyboard ring on cards in the TV layout follows `--cn-text`, like every other focus ring.
+- Jellyfin 12.2: pages without artwork (people, albums, playlists) opened with a tall empty band
+  above the title on desktop. 12.2 keeps empty backdrop slots where 12.1 removed them, so the
+  short header now looks for an image rather than an empty layer. Works on 12.1 too.
 
 ## [0.2.0] - 2026-10-06
 

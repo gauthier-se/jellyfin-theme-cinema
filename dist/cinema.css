@@ -1,4 +1,4 @@
-/*! Cinema v0.2.0 for Jellyfin 12.1 | MIT | github.com/gauthier-se/jellyfin-theme-cinema */
+/*! Cinema v0.2.0 for Jellyfin 12.1 and 12.2 | MIT | github.com/gauthier-se/jellyfin-theme-cinema */
 :root {
   --cn-bg: #141414;
   --cn-bg-rgb: 20 20 20;
@@ -949,11 +949,11 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   color: var(--cn-text-3);
 }
 
-html.layout-desktop:has(.backdropContainer:empty) .itemDetailPage .itemBackdrop {
+html.layout-desktop:not(:has(.backdropContainer .backdropImage[style*="url("])) .itemDetailPage .itemBackdrop {
   height: calc(var(--cn-bar-h) + 15rem);
 }
 
-html.layout-desktop:has(.backdropContainer:empty) .itemDetailPage .detailLogo {
+html.layout-desktop:not(:has(.backdropContainer .backdropImage[style*="url("])) .itemDetailPage .detailLogo {
   display: none;
 }
 
