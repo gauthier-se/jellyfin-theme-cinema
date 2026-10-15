@@ -68,11 +68,14 @@
 
 /*
  * No artwork (people, playlists): a short header instead of an empty band.
- * Desktops show the page backdrop through the header, so an empty backdrop
- * layer is the sign. It fills once the image has loaded; the transition
- * above eases the header open then.
+ * Desktops show the page backdrop through the header, so a backdrop layer
+ * with no image in it is the sign. It fills once the image has loaded; the
+ * transition above eases the header open then.
+ *
+ * "No image", not "empty": 12.1 emptied the layer, 12.2 keeps two
+ * .backdropImage slots and sets them to `background-image: none`.
  */
-html.layout-desktop:has(.backdropContainer:empty) .itemDetailPage {
+html.layout-desktop:not(:has(.backdropContainer .backdropImage[style*="url("])) .itemDetailPage {
     .itemBackdrop {
         height: calc(var(--cn-bar-h) + 15rem);
     }
