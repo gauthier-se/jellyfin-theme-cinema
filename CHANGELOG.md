@@ -8,6 +8,8 @@ a patch for fixes.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-15
+
 ### Added
 
 - `--cn-blur-sm`, the blur of small glass (play discs, badges, round buttons, tooltips), and
@@ -88,6 +90,7 @@ First release, for Jellyfin 12.1 and its modern layout.
 - Customisation through `--cn-*` variables.
 - Add-ons for Media Bar 3.0, Jellyfin Enhanced 12.x and Cinematheque 0.3.
 
-[Unreleased]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/gauthier-se/jellyfin-theme-cinema/releases/tag/v0.1.0
