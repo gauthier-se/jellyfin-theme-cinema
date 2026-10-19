@@ -805,15 +805,11 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 .homeSectionsContainer .scrollSlider:has( > .card[data-type="CollectionFolder"],  > a.raised[href*="livetv?tab="]) {
   --cn-tile-w: max(var(--cn-tile-min),
         (100% - (var(--cn-tile-columns) - 1) * var(--cn-tile-gap)) / var(--cn-tile-columns));
-  grid-template-columns: repeat(auto-fit, minmax(var(--cn-tile-w), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(var(--cn-tile-w), 1fr));
   gap: var(--cn-tile-gap);
   padding-top: 1em;
   padding-bottom: 1em;
   display: grid;
-}
-
-.homeSectionsContainer .scrollSlider:has( > .card[data-type="CollectionFolder"],  > a.raised[href*="livetv?tab="]):not(:has( > :nth-child(4))) {
-  grid-template-columns: repeat(auto-fill, minmax(var(--cn-tile-w), 1fr));
 }
 
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) .card {

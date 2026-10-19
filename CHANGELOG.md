@@ -8,6 +8,12 @@ a patch for fixes.
 
 ## [Unreleased]
 
+### Changed
+
+- Home: every My Media and Live TV tile takes one column of the same grid, however many share its
+  row. A short row no longer stretches its tiles to fill the width, so Live TV's six shortcuts
+  line up under the libraries instead of coming out wider, and the row ends early.
+
 ## [0.3.0] - 2026-10-15
 
 ### Added
