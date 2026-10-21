@@ -10,9 +10,10 @@ a patch for fixes.
 
 ### Changed
 
-- Home: every My Media and Live TV tile takes one column of the same grid, however many share its
-  row. A short row no longer stretches its tiles to fill the width, so Live TV's six shortcuts
-  line up under the libraries instead of coming out wider, and the row ends early.
+- Home: My Media and the Live TV shortcuts scroll sideways in one row again, like the other rows,
+  instead of wrapping onto a second line. Every tile keeps the same width, however many share its
+  row, so Live TV's six shortcuts line up under the libraries. `--cn-tile-columns` is now the
+  number of tiles in view; phones show two and a half, so the row shows it scrolls.
 
 ## [0.3.0] - 2026-10-15
 
