@@ -68,7 +68,7 @@
 
 @media not (min-width: 600px) {
   :root {
-    --cn-tile-columns: 2;
+    --cn-tile-columns: 2.5;
     --cn-tile-gap: 10px;
     --cn-tile-h: 52px;
   }
@@ -805,8 +805,9 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 .homeSectionsContainer .scrollSlider:has( > .card[data-type="CollectionFolder"],  > a.raised[href*="livetv?tab="]) {
   --cn-tile-w: max(var(--cn-tile-min),
         (100% - (var(--cn-tile-columns) - 1) * var(--cn-tile-gap)) / var(--cn-tile-columns));
-  grid-template-columns: repeat(auto-fill, minmax(var(--cn-tile-w), 1fr));
+  grid-auto-columns: var(--cn-tile-w);
   gap: var(--cn-tile-gap);
+  grid-auto-flow: column;
   padding-top: 1em;
   padding-bottom: 1em;
   display: grid;

@@ -89,8 +89,8 @@
     --cn-detail-header: clamp(15rem, 40vh, 30rem);
 
     /* Home tiles (My Media, Live TV): one size for both rows. A tile is one
-       of --cn-tile-columns columns across the row, never under
-       --cn-tile-min; past a full row the tiles wrap (home.css). */
+       of --cn-tile-columns in view across the row, never under
+       --cn-tile-min; past them the row scrolls sideways (home.css). */
     --cn-tile-columns: 7;
     --cn-tile-min: 120px;
     --cn-tile-gap: 18px;
@@ -112,18 +112,18 @@
     --cn-bar-h: 64px;
 }
 
-/* Tablets and narrow windows: fewer, larger home tiles. Four, not five:
-   Live TV always has six shortcuts, and 5 + 1 would strand one. */
+/* Tablets and narrow windows: fewer, larger home tiles */
 @media (width < 1200px) {
     :root {
         --cn-tile-columns: 4;
     }
 }
 
-/* Phones: two columns of short tiles, so the shortcuts take little height */
+/* Phones: two and a half short tiles in view, so the half one shows the row
+   scrolls */
 @media (width < 600px) {
     :root {
-        --cn-tile-columns: 2;
+        --cn-tile-columns: 2.5;
         --cn-tile-gap: 10px;
         --cn-tile-h: 52px;
     }

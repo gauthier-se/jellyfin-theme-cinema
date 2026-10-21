@@ -1,9 +1,9 @@
 /*
  * Home: My Media and the Live TV shortcuts as plain tiles of one size, in a
- * grid instead of Jellyfin's scrolling row, so every shortcut is in view. A
- * tile takes one of --cn-tile-columns columns, never under --cn-tile-min,
- * however many share its row: both rows keep the same columns, so their
- * tiles line up, and a short row ends early. Past a full row, they wrap.
+ * row that scrolls sideways like Jellyfin's. A grid lays it out so a tile is
+ * one of --cn-tile-columns in view, never under --cn-tile-min, however many
+ * share its row: both rows keep the same width, so their tiles line up, and
+ * past the last column the row scrolls rather than wraps.
  *
  * My Media is the only home row holding CollectionFolder cards, so the row
  * is found through them. That way Playlists and Live TV, which are
@@ -17,7 +17,8 @@
     );
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--cn-tile-w), 1fr));
+    grid-auto-columns: var(--cn-tile-w);
+    grid-auto-flow: column;
     gap: var(--cn-tile-gap);
 
     /* Live TV's .padded-top and .padded-bottom, for My Media too */
@@ -31,7 +32,7 @@
         width: auto;
     }
 
-    /* Its margins would open the gaps between wrapped rows. Jellyfin sets
+    /* Its margins would add to the grid's gap. Jellyfin sets
        .cardBox-bottompadded's with !important on narrow screens. */
     .cardBox {
         position: relative;
