@@ -61,7 +61,7 @@
 }
 
 :root.layout-tv {
-  --cn-detail-poster: clamp(13rem, 18vw, 22rem);
+  --cn-detail-poster: 18vw;
 }
 
 @media not (min-width: 1200px) {
@@ -634,7 +634,7 @@ html:not(.layout-tv) .overflowBackdropCard {
   }
 }
 
-html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground2, .defaultCardBackground3, .defaultCardBackground4, .defaultCardBackground5) {
+html .defaultCardBackground, html .defaultCardBackground1, html .defaultCardBackground2, html .defaultCardBackground3, html .defaultCardBackground4, html .defaultCardBackground5 {
   background: linear-gradient(160deg, #303030, var(--cn-surface));
 }
 
@@ -817,6 +817,10 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   display: grid;
 }
 
+.homeSectionsContainer .scrollSlider:has( > .card[data-type="CollectionFolder"],  > a.raised[href*="livetv?tab="]) > a.raised {
+  margin-right: 0;
+}
+
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) .card {
   width: auto;
 }
@@ -873,7 +877,10 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
 
 .homeSectionsContainer a.raised[href*="livetv?tab="] {
   box-sizing: border-box;
+  vertical-align: top;
+  min-width: var(--cn-tile-min);
   height: var(--cn-tile-h);
+  margin: 0 var(--cn-tile-gap) 0 0;
   border-radius: var(--cn-radius);
   background: var(--cn-surface);
   box-shadow: none;
@@ -885,10 +892,9 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   transition: background-color .35s var(--cn-ease);
   justify-content: center;
   align-items: center;
-  margin: 0;
   padding: 0 1rem;
   font-weight: 600;
-  display: flex;
+  display: inline-flex;
 }
 
 .homeSectionsContainer a.raised[href*="livetv?tab="]:hover {
@@ -927,7 +933,7 @@ html:not(.layout-tv) .itemDetailPage .detailPageWrapperContainer {
   font-weight: 800;
 }
 
-:is(.layout-desktop, .layout-tv) .itemDetailPage h1.itemName {
+.layout-desktop .itemDetailPage h1.itemName {
   font-size: 2.3rem;
 }
 
@@ -1008,16 +1014,16 @@ html:not(.transparentDocument, .layout-tv):has(.itemDetailPage:not(.hide)) .back
   box-shadow: 0 20px 50px #0009;
 }
 
-:is(.layout-desktop, .layout-tv) .detailImageContainer .card {
+.layout-desktop .detailImageContainer .card {
   width: var(--cn-detail-poster);
   max-width: none;
 }
 
-:is(.layout-desktop, .layout-tv) [dir="ltr"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
+.layout-desktop [dir="ltr"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
   padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 
-:is(.layout-desktop, .layout-tv) [dir="rtl"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
+.layout-desktop [dir="rtl"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
   padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 
@@ -1190,7 +1196,8 @@ html.layout-tv body:not(.dashboardDocument) .headerTabs .emby-tab-button {
   transition: background-color .2s,
             color .2s,
             transform .2s var(--cn-ease);
-  margin-block: .95em;
+  margin-top: .95em;
+  margin-bottom: .95em;
   padding: .55em 1.2em;
 }
 
@@ -1220,9 +1227,13 @@ html.layout-tv body:not(.dashboardDocument) .paper-icon-button-light.show-focus:
   transform: scale(1.08);
 }
 
-html.layout-tv body:not(.dashboardDocument) .card.show-focus:focus .cardScalable {
+html.layout-tv body:not(.dashboardDocument) .card.show-focus.show-animation:focus .cardScalable {
   outline: 2px solid var(--cn-text);
   outline-offset: 2px;
+}
+
+html.layout-tv body:not(.dashboardDocument) .verticalSection:has(.card[data-type="CollectionFolder"]) .card.show-focus .cardScalable {
+  border: 0;
 }
 
 html.layout-tv body:not(.dashboardDocument) .verticalSection:has(.card[data-type="CollectionFolder"]) .card.show-focus:focus .cardPadder {
@@ -1242,6 +1253,8 @@ html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgr
 }
 
 .layout-tv .detailImageContainer .card {
+  width: var(--cn-detail-poster);
+  max-width: none;
   margin-right: calc(-1 * var(--cn-detail-poster));
 }
 
@@ -1253,4 +1266,27 @@ html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgr
   right: var(--cn-gutter);
   margin-right: 0;
   margin-left: calc(-1 * var(--cn-detail-poster));
+}
+
+.layout-tv [dir="ltr"] .itemDetailPage .detailRibbon, .layout-tv [dir="ltr"] .itemDetailPage .detailPagePrimaryContent {
+  padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
+}
+
+.layout-tv [dir="rtl"] .itemDetailPage .detailRibbon, .layout-tv [dir="rtl"] .itemDetailPage .detailPagePrimaryContent {
+  padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
+}
+
+.layout-tv .itemDetailPage h1.itemName {
+  font-size: 2.3rem;
+}
+
+@supports not (color-scheme: dark) {
+  html.layout-tv body:not(.dashboardDocument) .emby-button:not(.emby-tab-button).show-focus:focus {
+    box-shadow: 0 0 0 2px var(--cn-bg),
+            0 0 0 4px var(--cn-text);
+  }
+
+  .layout-tv .mainDetailButtons .detailButton {
+    margin-right: .6em !important;
+  }
 }

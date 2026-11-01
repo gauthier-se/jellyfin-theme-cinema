@@ -24,6 +24,11 @@
     /* Live TV's .padded-top and .padded-bottom, for My Media too */
     padding-top: 1em;
     padding-bottom: 1em;
+
+    /* The grid's gap replaces the shortcuts' margin */
+    > a.raised {
+        margin-right: 0;
+    }
 }
 
 .homeSectionsContainer .verticalSection:has(.card[data-type="CollectionFolder"]) {
@@ -89,14 +94,18 @@
     font-weight: 600;
 }
 
-/* Live TV shortcuts, as the same tile */
+/* Live TV shortcuts, as the same tile. The grid above needs :has(): on older
+   TVs inline-flex and the margin keep them in a row, where flex would stack
+   them across the page. Inside the grid, inline-flex counts as flex. */
 .homeSectionsContainer a.raised[href*="livetv?tab="] {
     box-sizing: border-box;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    vertical-align: top;
+    min-width: var(--cn-tile-min);
     height: var(--cn-tile-h);
-    margin: 0;
+    margin: 0 var(--cn-tile-gap) 0 0;
     padding: 0 1rem;
     border-radius: var(--cn-radius);
     background: var(--cn-surface);

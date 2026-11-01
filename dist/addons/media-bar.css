@@ -310,3 +310,9 @@ html:not(.layout-tv) #slides-container .arrow {
     background: linear-gradient(0deg, #000000d9 0%, #00000059 45%, #0000 70%);
   }
 }
+
+@supports not (color-scheme: dark) {
+  html.layout-tv .homeSectionsContainer {
+    margin-top: 0;
+  }
+}

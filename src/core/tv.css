@@ -1,9 +1,13 @@
 /*
  * TV layout: Jellyfin's web client on a television, driven by a remote. It
  * keeps the legacy header (.skinHeader, no MUI app bar) and marks focus with
- * .show-focus: blue and scaled. This part gives it the theme's top bar and
- * focus, with colours set here rather than through Jellyfin's palette. Item
- * pages share details.css with the desktop layout.
+ * .show-focus: blue and scaled. This part gives it the theme's top bar, focus
+ * and item pages, with colours set here rather than through Jellyfin's
+ * palette.
+ *
+ * A TV keeps its browser engine for years: webOS 6 runs Chromium 79, webOS 23
+ * Chromium 94. Rules the layout depends on here stay away from what those
+ * reject, such as :is(), :has() and logical margins.
  */
 
 html.layout-tv body:not(.dashboardDocument) {
@@ -14,9 +18,11 @@ html.layout-tv body:not(.dashboardDocument) {
     }
 
     /* Tabs: the pills of the desktop bar. The margin takes over Jellyfin's
-       padding, so the bar keeps its height and the tab can grow inside it. */
+       padding, so the bar keeps its height and the tab can grow inside it.
+       Not margin-block: without it the bar collapses and crops its icons. */
     .headerTabs .emby-tab-button {
-        margin-block: 0.95em;
+        margin-top: 0.95em;
+        margin-bottom: 0.95em;
         padding: 0.55em 1.2em;
         border-radius: var(--cn-pill);
         transition:
@@ -58,22 +64,30 @@ html.layout-tv body:not(.dashboardDocument) {
         transform: scale(1.08);
     }
 
-    /* Cards: with animations on, Jellyfin only scales them by 7%, which a
+    /* Cards: where animations run, Jellyfin only scales them by 7%, which a
        dark tile or poster hardly shows, and draws no border. They take the
-       ring of the other focused elements. */
-    .card.show-focus:focus .cardScalable {
+       ring of the other focused elements. Real TVs turn animations off and
+       get Jellyfin's border instead (cards.css), so no second ring there. */
+    .card.show-focus.show-animation:focus .cardScalable {
         outline: 2px solid var(--cn-text);
         outline-offset: 2px;
     }
 
-    /* Home tiles turn white, like the Live TV shortcuts, which are buttons */
-    .verticalSection:has(.card[data-type="CollectionFolder"]) .card.show-focus:focus {
-        .cardPadder {
-            background: var(--cn-primary);
+    /* Home tiles match the Live TV shortcuts, which are buttons: Jellyfin's
+       border would make them narrower, and on focus they turn white */
+    .verticalSection:has(.card[data-type="CollectionFolder"]) .card.show-focus {
+        .cardScalable {
+            border: 0;
         }
 
-        .cardText {
-            color: var(--cn-on-primary);
+        &:focus {
+            .cardPadder {
+                background: var(--cn-primary);
+            }
+
+            .cardText {
+                color: var(--cn-on-primary);
+            }
         }
     }
 }
@@ -81,7 +95,7 @@ html.layout-tv body:not(.dashboardDocument) {
 /*
  * Item pages: .itemBackdrop is hidden here, so the artwork fills the page
  * from the layer behind it. A veil, heavier on the side of the text, keeps
- * the page readable at a distance.
+ * the page readable at a distance. Without :has(), Jellyfin's plain veil.
  */
 html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide))
     .backgroundContainer.withBackdrop {
@@ -94,9 +108,11 @@ html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide))
     opacity: 1;
 }
 
-/* Poster on the page gutter. Jellyfin pulls the text in by the poster's own
-   25vw, on top of the indent details.css sets. */
+/* A smaller poster on the page gutter, and the text indented past it, as on
+   desktop (details.css). Jellyfin pulls the text in by the poster's 25vw. */
 .layout-tv .detailImageContainer .card {
+    width: var(--cn-detail-poster);
+    max-width: none;
     margin-right: calc(-1 * var(--cn-detail-poster));
 }
 
@@ -108,4 +124,39 @@ html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide))
     right: var(--cn-gutter);
     margin-right: 0;
     margin-left: calc(-1 * var(--cn-detail-poster));
+}
+
+.layout-tv [dir="ltr"] .itemDetailPage .detailRibbon,
+.layout-tv [dir="ltr"] .itemDetailPage .detailPagePrimaryContent {
+    padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
+}
+
+.layout-tv [dir="rtl"] .itemDetailPage .detailRibbon,
+.layout-tv [dir="rtl"] .itemDetailPage .detailPagePrimaryContent {
+    padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
+}
+
+.layout-tv .itemDetailPage h1.itemName {
+    font-size: 2.3rem;
+}
+
+/*
+ * Engines under Chromium 81 (webOS 6 and older), told apart by color-scheme.
+ * They have no flex gap between the item page's buttons, and no :focus-visible
+ * for the ring in base.css. It comes back as a shadow: their outlines ignore
+ * the radius, so a round button would get a square ring.
+ */
+@supports not (color-scheme: dark) {
+    html.layout-tv
+        body:not(.dashboardDocument)
+        .emby-button:not(.emby-tab-button).show-focus:focus {
+        box-shadow:
+            0 0 0 2px var(--cn-bg),
+            0 0 0 4px var(--cn-text);
+    }
+
+    /* Jellyfin zeroes this margin with !important */
+    .layout-tv .mainDetailButtons .detailButton {
+        margin-right: 0.6em !important;
+    }
 }

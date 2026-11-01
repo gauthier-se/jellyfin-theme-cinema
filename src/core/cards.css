@@ -79,16 +79,13 @@ html:not(.layout-tv) {
 
 /* Cards without artwork: a quiet surface instead of Jellyfin's blues. The
    html prefix outranks Jellyfin's theme stylesheet, which loads after
-   Custom CSS. */
-html
-    :is(
-        .defaultCardBackground,
-        .defaultCardBackground1,
-        .defaultCardBackground2,
-        .defaultCardBackground3,
-        .defaultCardBackground4,
-        .defaultCardBackground5
-    ) {
+   Custom CSS. A plain list: TVs under Chromium 88 reject :is(). */
+html .defaultCardBackground,
+html .defaultCardBackground1,
+html .defaultCardBackground2,
+html .defaultCardBackground3,
+html .defaultCardBackground4,
+html .defaultCardBackground5 {
     background: linear-gradient(160deg, #303030, var(--cn-surface));
 }
 
