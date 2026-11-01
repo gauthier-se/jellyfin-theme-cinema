@@ -13,6 +13,7 @@ a patch for fixes.
 - The TV layout, what the web client shows on a television: a top bar with no slab and tabs as
   pills, white focus on tabs and buttons, a ring on focused cards and home tiles, and the theme's
   poster and title on item pages.
+- Jellyfin 12.3 and 12.4, checked with no change to the theme.
 
 ### Fixed
 

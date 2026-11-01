@@ -5,7 +5,7 @@ name: cinema-test
 
 services:
   jellyfin:
-    image: jellyfin/jellyfin:12.2
+    image: jellyfin/jellyfin:12.4
     ports:
       - 127.0.0.1:${CINEMA_TEST_PORT:-8096}:8096
     volumes:
