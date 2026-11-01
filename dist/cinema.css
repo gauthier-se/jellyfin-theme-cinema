@@ -60,6 +60,10 @@
   --cn-bar-h: 64px;
 }
 
+:root.layout-tv {
+  --cn-detail-poster: clamp(13rem, 18vw, 22rem);
+}
+
 @media not (min-width: 1200px) {
   :root {
     --cn-tile-columns: 4;
@@ -912,7 +916,7 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   inset: 0;
 }
 
-.itemDetailPage .detailPageWrapperContainer {
+html:not(.layout-tv) .itemDetailPage .detailPageWrapperContainer {
   background: var(--cn-bg);
 }
 
@@ -923,7 +927,7 @@ html :is(.defaultCardBackground, .defaultCardBackground1, .defaultCardBackground
   font-weight: 800;
 }
 
-.layout-desktop .itemDetailPage h1.itemName {
+:is(.layout-desktop, .layout-tv) .itemDetailPage h1.itemName {
   font-size: 2.3rem;
 }
 
@@ -988,7 +992,7 @@ html.layout-mobile .itemDetailPage:has(.itemBackdrop:not(.lazy-hidden, [style*="
   inset: auto;
 }
 
-html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContainer.withBackdrop {
+html:not(.transparentDocument, .layout-tv):has(.itemDetailPage:not(.hide)) .backgroundContainer.withBackdrop {
   opacity: .25;
 }
 
@@ -1004,16 +1008,16 @@ html:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContai
   box-shadow: 0 20px 50px #0009;
 }
 
-.layout-desktop .detailImageContainer .card {
+:is(.layout-desktop, .layout-tv) .detailImageContainer .card {
   width: var(--cn-detail-poster);
   max-width: none;
 }
 
-.layout-desktop [dir="ltr"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
+:is(.layout-desktop, .layout-tv) [dir="ltr"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
   padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 
-.layout-desktop [dir="rtl"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
+:is(.layout-desktop, .layout-tv) [dir="rtl"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
   padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 
@@ -1175,4 +1179,78 @@ html:not(.transparentDocument):has(#loginPage:not(.hide)) .backgroundContainer {
 
 #loginPage .loginDisclaimerContainer:has(.loginDisclaimer:empty) {
   display: none;
+}
+
+html.layout-tv body:not(.dashboardDocument) .skinHeader-withBackground:not(.osdHeader) {
+  background: none;
+}
+
+html.layout-tv body:not(.dashboardDocument) .headerTabs .emby-tab-button {
+  border-radius: var(--cn-pill);
+  transition: background-color .2s,
+            color .2s,
+            transform .2s var(--cn-ease);
+  margin-block: .95em;
+  padding: .55em 1.2em;
+}
+
+html.layout-tv body:not(.dashboardDocument) .headerTabs .emby-tab-button-active {
+  background: var(--cn-selected);
+  color: var(--cn-text);
+}
+
+html.layout-tv body:not(.dashboardDocument) .headerTabs .emby-tab-button.show-focus:focus {
+  color: var(--cn-on-primary);
+  background: var(--cn-primary) !important;
+  transform: scale(1.06) !important;
+}
+
+html.layout-tv body:not(.dashboardDocument) .headerTabs .emby-tab-button:focus-visible {
+  outline: none !important;
+}
+
+html.layout-tv body:not(.dashboardDocument) .emby-button:not(.emby-tab-button).show-focus:focus {
+  background: var(--cn-primary);
+  color: var(--cn-on-primary);
+  transform: scale(1.08);
+}
+
+html.layout-tv body:not(.dashboardDocument) .paper-icon-button-light.show-focus:focus {
+  color: var(--cn-text);
+  transform: scale(1.08);
+}
+
+html.layout-tv body:not(.dashboardDocument) .card.show-focus:focus .cardScalable {
+  outline: 2px solid var(--cn-text);
+  outline-offset: 2px;
+}
+
+html.layout-tv body:not(.dashboardDocument) .verticalSection:has(.card[data-type="CollectionFolder"]) .card.show-focus:focus .cardPadder {
+  background: var(--cn-primary);
+}
+
+html.layout-tv body:not(.dashboardDocument) .verticalSection:has(.card[data-type="CollectionFolder"]) .card.show-focus:focus .cardText {
+  color: var(--cn-on-primary);
+}
+
+html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgroundContainer.withBackdrop {
+  background: linear-gradient(100deg,
+        rgb(var(--cn-bg-rgb) / 94%) 0%,
+        rgb(var(--cn-bg-rgb) / 88%) 55%,
+        rgb(var(--cn-bg-rgb) / 76%) 100%);
+  opacity: 1;
+}
+
+.layout-tv .detailImageContainer .card {
+  margin-right: calc(-1 * var(--cn-detail-poster));
+}
+
+.layout-tv [dir="ltr"] .detailImageContainer .card {
+  left: var(--cn-gutter);
+}
+
+.layout-tv [dir="rtl"] .detailImageContainer .card {
+  right: var(--cn-gutter);
+  margin-right: 0;
+  margin-left: calc(-1 * var(--cn-detail-poster));
 }

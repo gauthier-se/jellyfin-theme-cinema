@@ -35,8 +35,8 @@ The URL names a release, so the theme only changes when you change it. Release n
 ## Requirements
 
 - **Jellyfin 12.1 or 12.2**, web client.
-- **The modern layout**, the default. The legacy desktop and mobile layouts and the TV layout are
-  not styled.
+- **The modern layout**, the default, or **the TV layout** the web client shows on a television.
+  The legacy desktop and mobile layouts are not styled.
 - **A recent browser**: Chrome or Edge 105, Firefox 121, Safari 16 or later. The theme relies on
   `:has()` and container queries; its nesting is compiled away at build time.
 - Native apps that render their own interface (Swiftfin, Android TV, Findroid) ignore Custom CSS.

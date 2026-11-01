@@ -112,6 +112,11 @@
     --cn-bar-h: 64px;
 }
 
+/* TV: a larger poster, seen from across the room */
+:root.layout-tv {
+    --cn-detail-poster: clamp(13rem, 18vw, 22rem);
+}
+
 /* Tablets and narrow windows: fewer, larger home tiles */
 @media (width < 1200px) {
     :root {

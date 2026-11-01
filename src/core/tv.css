@@ -1,0 +1,111 @@
+/*
+ * TV layout: Jellyfin's web client on a television, driven by a remote. It
+ * keeps the legacy header (.skinHeader, no MUI app bar) and marks focus with
+ * .show-focus: blue and scaled. This part gives it the theme's top bar and
+ * focus, with colours set here rather than through Jellyfin's palette. Item
+ * pages share details.css with the desktop layout.
+ */
+
+html.layout-tv body:not(.dashboardDocument) {
+    /* No slab: nothing scrolls under this bar, which is position: relative
+       here. The player keeps its gradient. */
+    .skinHeader-withBackground:not(.osdHeader) {
+        background: transparent;
+    }
+
+    /* Tabs: the pills of the desktop bar. The margin takes over Jellyfin's
+       padding, so the bar keeps its height and the tab can grow inside it. */
+    .headerTabs .emby-tab-button {
+        margin-block: 0.95em;
+        padding: 0.55em 1.2em;
+        border-radius: var(--cn-pill);
+        transition:
+            background-color 0.2s,
+            color 0.2s,
+            transform 0.2s var(--cn-ease);
+    }
+
+    .headerTabs .emby-tab-button-active {
+        background: var(--cn-selected);
+        color: var(--cn-text);
+    }
+
+    /* Focus turns the tab into a white pill, like tvOS. Jellyfin clears the
+       background and scales the tab by 1.3, both with !important: at that
+       size the tab bar crops the ring to two vertical lines, so it goes. */
+    .headerTabs .emby-tab-button.show-focus:focus {
+        background: var(--cn-primary) !important;
+        color: var(--cn-on-primary);
+        transform: scale(1.06) !important;
+    }
+
+    .headerTabs .emby-tab-button:focus-visible {
+        outline: none !important;
+    }
+
+    /* Buttons take the white of the primary action, not Jellyfin's blue, and
+       a smaller scale: at 1.2 Play covers its neighbour. Other tab bars stay
+       out: Jellyfin clears their background with !important. */
+    .emby-button:not(.emby-tab-button).show-focus:focus {
+        background: var(--cn-primary);
+        color: var(--cn-on-primary);
+        transform: scale(1.08);
+    }
+
+    /* Icon buttons: the same scale, as 1.3 would cover their neighbours */
+    .paper-icon-button-light.show-focus:focus {
+        color: var(--cn-text);
+        transform: scale(1.08);
+    }
+
+    /* Cards: with animations on, Jellyfin only scales them by 7%, which a
+       dark tile or poster hardly shows, and draws no border. They take the
+       ring of the other focused elements. */
+    .card.show-focus:focus .cardScalable {
+        outline: 2px solid var(--cn-text);
+        outline-offset: 2px;
+    }
+
+    /* Home tiles turn white, like the Live TV shortcuts, which are buttons */
+    .verticalSection:has(.card[data-type="CollectionFolder"]) .card.show-focus:focus {
+        .cardPadder {
+            background: var(--cn-primary);
+        }
+
+        .cardText {
+            color: var(--cn-on-primary);
+        }
+    }
+}
+
+/*
+ * Item pages: .itemBackdrop is hidden here, so the artwork fills the page
+ * from the layer behind it. A veil, heavier on the side of the text, keeps
+ * the page readable at a distance.
+ */
+html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide))
+    .backgroundContainer.withBackdrop {
+    background: linear-gradient(
+        100deg,
+        rgb(var(--cn-bg-rgb) / 94%) 0%,
+        rgb(var(--cn-bg-rgb) / 88%) 55%,
+        rgb(var(--cn-bg-rgb) / 76%) 100%
+    );
+    opacity: 1;
+}
+
+/* Poster on the page gutter. Jellyfin pulls the text in by the poster's own
+   25vw, on top of the indent details.css sets. */
+.layout-tv .detailImageContainer .card {
+    margin-right: calc(-1 * var(--cn-detail-poster));
+}
+
+.layout-tv [dir="ltr"] .detailImageContainer .card {
+    left: var(--cn-gutter);
+}
+
+.layout-tv [dir="rtl"] .detailImageContainer .card {
+    right: var(--cn-gutter);
+    margin-right: 0;
+    margin-left: calc(-1 * var(--cn-detail-poster));
+}
