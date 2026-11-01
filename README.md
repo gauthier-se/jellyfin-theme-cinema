@@ -116,6 +116,8 @@ one after the other, into Custom CSS instead of the `@import` lines.
 ## Known limits
 
 - The dashboard keeps Jellyfin's own look, on purpose.
+- Samsung's app bundles its own copy of the web client, which can be older than the server. Custom
+  CSS reaches it, but plugins that add to the server's page, like Media Bar, do not.
 - The selectors follow jellyfin-web 12.4, and still hold back to 12.1, and the plugin versions listed
   under Add-ons. A new Jellyfin or plugin release can move class names; the theme is checked
   against it before a release says it supports it.

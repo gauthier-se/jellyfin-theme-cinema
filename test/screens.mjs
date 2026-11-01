@@ -242,6 +242,14 @@ export const screens = [
         },
     },
     {
+        name: "tv-header-user",
+        viewport: "tv",
+        visit: async (page) => {
+            await openTv("#/home")(page);
+            await focus(".skinHeader .headerUserButton")(page);
+        },
+    },
+    {
         name: "tv-home-tile",
         viewport: "tv",
         visit: async (page) => {
@@ -275,6 +283,15 @@ export const screens = [
         visit: async (page, ids) => {
             await openTv(details(ids.movie, ids))(page);
             await focus(detailButton("btnUserRating"))(page);
+        },
+    },
+    {
+        // Jellyfin sets the colour of these links inline
+        name: "tv-movie-link",
+        viewport: "tv",
+        visit: async (page, ids) => {
+            await openTv(details(ids.movie, ids))(page);
+            await focus(".itemDetailPage:not(.hide) .itemDetailsGroup a")(page);
         },
     },
     {
