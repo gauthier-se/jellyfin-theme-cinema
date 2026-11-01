@@ -51,17 +51,29 @@ html.layout-tv body:not(.dashboardDocument) {
 
     /* Buttons take the white of the primary action, not Jellyfin's blue, and
        a smaller scale: at 1.2 Play covers its neighbour. Other tab bars stay
-       out: Jellyfin clears their background with !important. */
+       out: Jellyfin clears their background with !important. Links to people
+       on item pages are buttons too, with `color: inherit` set inline. */
     .emby-button:not(.emby-tab-button).show-focus:focus {
         background: var(--cn-primary);
-        color: var(--cn-on-primary);
+        color: var(--cn-on-primary) !important;
         transform: scale(1.08);
     }
 
-    /* Icon buttons: the same scale, as 1.3 would cover their neighbours */
+    /* A link sits in a line of text: scaled, it would cover the next word */
+    .emby-button.button-link.show-focus:focus {
+        transform: none;
+    }
+
+    /* Icon buttons: a white disc, in place. The top bar crops a ring or a
+       larger button, and engines under Chromium 86 draw no ring at all. */
     .paper-icon-button-light.show-focus:focus {
-        color: var(--cn-text);
-        transform: scale(1.08);
+        background: var(--cn-primary);
+        color: var(--cn-on-primary);
+        transform: none;
+    }
+
+    .paper-icon-button-light:focus-visible {
+        outline: none !important;
     }
 
     /* Cards: where animations run, Jellyfin only scales them by 7%, which a
@@ -126,13 +138,17 @@ html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide))
     margin-left: calc(-1 * var(--cn-detail-poster));
 }
 
+/* .detailPageContent is jellyfin-web 10.x, which TV apps may bundle (Samsung
+   does): it sets the sections below the text in Jellyfin's own column */
 .layout-tv [dir="ltr"] .itemDetailPage .detailRibbon,
-.layout-tv [dir="ltr"] .itemDetailPage .detailPagePrimaryContent {
+.layout-tv [dir="ltr"] .itemDetailPage .detailPagePrimaryContent,
+.layout-tv [dir="ltr"] .itemDetailPage .detailPageContent {
     padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 
 .layout-tv [dir="rtl"] .itemDetailPage .detailRibbon,
-.layout-tv [dir="rtl"] .itemDetailPage .detailPagePrimaryContent {
+.layout-tv [dir="rtl"] .itemDetailPage .detailPagePrimaryContent,
+.layout-tv [dir="rtl"] .itemDetailPage .detailPageContent {
     padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 

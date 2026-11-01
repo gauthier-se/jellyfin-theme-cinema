@@ -1218,13 +1218,22 @@ html.layout-tv body:not(.dashboardDocument) .headerTabs .emby-tab-button:focus-v
 
 html.layout-tv body:not(.dashboardDocument) .emby-button:not(.emby-tab-button).show-focus:focus {
   background: var(--cn-primary);
-  color: var(--cn-on-primary);
   transform: scale(1.08);
+  color: var(--cn-on-primary) !important;
+}
+
+html.layout-tv body:not(.dashboardDocument) .emby-button.button-link.show-focus:focus {
+  transform: none;
 }
 
 html.layout-tv body:not(.dashboardDocument) .paper-icon-button-light.show-focus:focus {
-  color: var(--cn-text);
-  transform: scale(1.08);
+  background: var(--cn-primary);
+  color: var(--cn-on-primary);
+  transform: none;
+}
+
+html.layout-tv body:not(.dashboardDocument) .paper-icon-button-light:focus-visible {
+  outline: none !important;
 }
 
 html.layout-tv body:not(.dashboardDocument) .card.show-focus.show-animation:focus .cardScalable {
@@ -1268,11 +1277,11 @@ html.layout-tv:not(.transparentDocument):has(.itemDetailPage:not(.hide)) .backgr
   margin-left: calc(-1 * var(--cn-detail-poster));
 }
 
-.layout-tv [dir="ltr"] .itemDetailPage .detailRibbon, .layout-tv [dir="ltr"] .itemDetailPage .detailPagePrimaryContent {
+.layout-tv [dir="ltr"] .itemDetailPage .detailRibbon, .layout-tv [dir="ltr"] .itemDetailPage .detailPagePrimaryContent, .layout-tv [dir="ltr"] .itemDetailPage .detailPageContent {
   padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 
-.layout-tv [dir="rtl"] .itemDetailPage .detailRibbon, .layout-tv [dir="rtl"] .itemDetailPage .detailPagePrimaryContent {
+.layout-tv [dir="rtl"] .itemDetailPage .detailRibbon, .layout-tv [dir="rtl"] .itemDetailPage .detailPagePrimaryContent, .layout-tv [dir="rtl"] .itemDetailPage .detailPageContent {
   padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 

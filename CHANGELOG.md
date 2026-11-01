@@ -8,6 +8,15 @@ a patch for fixes.
 
 ## [Unreleased]
 
+### Fixed
+
+- TV layout: a focused link on item pages (people, genres, studios) was a blank white box, as
+  Jellyfin sets its colour inline.
+- TV layout: the focus ring of the top bar's icon buttons was cropped, and older TVs had none. They
+  turn into a white disc instead.
+- TV apps that bundle jellyfin-web 10.x, like Samsung's: the sections below an item's text sat out
+  of line with it.
+
 ## [0.4.1] - 2026-11-01
 
 ### Fixed
