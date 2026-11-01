@@ -34,7 +34,7 @@ The URL names a release, so the theme only changes when you change it. Release n
 
 ## Requirements
 
-- **Jellyfin 12.1 or 12.2**, web client.
+- **Jellyfin 12.1 to 12.4**, web client.
 - **The modern layout**, the default, or **the TV layout** the web client shows on a television.
   The legacy desktop and mobile layouts are not styled.
 - **A recent browser**: Chrome or Edge 105, Firefox 121, Safari 16 or later. The theme relies on
@@ -114,7 +114,7 @@ one after the other, into Custom CSS instead of the `@import` lines.
 ## Known limits
 
 - The dashboard keeps Jellyfin's own look, on purpose.
-- The selectors follow jellyfin-web 12.2, and still hold on 12.1, and the plugin versions listed
+- The selectors follow jellyfin-web 12.4, and still hold back to 12.1, and the plugin versions listed
   under Add-ons. A new Jellyfin or plugin release can move class names; the theme is checked
   against it before a release says it supports it.
 - Some reverse proxies send a `Content-Security-Policy` that blocks styles from other origins. If
@@ -128,7 +128,7 @@ the vendor prefixes the supported browsers need.
 
 ```sh
 npm install
-npm run server:up      # a throwaway Jellyfin 12.2 in Docker, on 127.0.0.1:8096
+npm run server:up      # a throwaway Jellyfin 12.4 in Docker, on 127.0.0.1:8096
 npm run server:seed    # films, series, music, Live TV and the add-on plugins
 npm run dev            # rebuilds and pushes the theme into that server on each save
 ```
