@@ -54,10 +54,28 @@ const liveTvRow = async (page) => {
 const toolbarButton = (icon) =>
     `.MuiAppBar-root .MuiToolbar-root + .MuiToolbar-root button:has(svg[data-testid="${icon}"])`;
 
+// The reload clears the focus, so Jellyfin gives it to the page as it arrives,
+// and closes a menu the previous screen left open.
+const openTv =
+    (hash, wait = 5000) =>
+    async (page) => {
+        await page.goto(`/web/${hash}`);
+        await page.reload();
+        await page.waitForTimeout(wait);
+    };
+
+// The TV layout has no pointer: it shows what the remote has focused.
+const focus = (selector) => async (page) => {
+    await page.locator(selector).first().focus();
+    await page.waitForTimeout(800);
+};
+
+const detailButton = (name) => `.itemDetailPage:not(.hide) .${name}`;
+
 /**
  * Screens run in order within a viewport, so one may build on the page the
  * previous one left (card-menu opens the menu of the card card-hover found).
- * @type {{ name: string, viewport: "desktop" | "mobile", anonymous?: boolean,
+ * @type {{ name: string, viewport: "desktop" | "mobile" | "tv", anonymous?: boolean,
  *          visit: (page, ids) => Promise<void> }[]}
  */
 export const screens = [
@@ -205,4 +223,89 @@ export const screens = [
         visit: (page, ids) => open(details(ids.person, ids))(page),
     },
     { name: "mobile-search", viewport: "mobile", visit: open("#/search?query=the", 4000) },
+
+    { name: "tv-home", viewport: "tv", visit: openTv("#/home", 8000) },
+    {
+        name: "tv-tab-focus",
+        viewport: "tv",
+        visit: async (page) => {
+            await openTv("#/home", 8000)(page);
+            await focus(".headerTabs .emby-tab-button-active")(page);
+        },
+    },
+    {
+        name: "tv-header-focus",
+        viewport: "tv",
+        visit: async (page) => {
+            await openTv("#/home")(page);
+            await focus(".skinHeader .headerSearchButton")(page);
+        },
+    },
+    {
+        name: "tv-home-tile",
+        viewport: "tv",
+        visit: async (page) => {
+            await openTv("#/home", 8000)(page);
+            await focus(".homeSectionsContainer .card[data-type=CollectionFolder]")(page);
+        },
+    },
+    {
+        // Needs a programme on air, like home-livetv
+        name: "tv-home-livetv",
+        viewport: "tv",
+        visit: async (page) => {
+            await openTv("#/home", 8000)(page);
+            await focus('a.raised[href*="livetv?tab="]')(page);
+        },
+    },
+    {
+        name: "tv-movies",
+        viewport: "tv",
+        visit: (page, ids) => openTv(library("movies", ids.movies))(page),
+    },
+    {
+        // Jellyfin focuses Play on arrival
+        name: "tv-movie",
+        viewport: "tv",
+        visit: (page, ids) => openTv(details(ids.movie, ids))(page),
+    },
+    {
+        name: "tv-movie-button",
+        viewport: "tv",
+        visit: async (page, ids) => {
+            await openTv(details(ids.movie, ids))(page);
+            await focus(detailButton("btnUserRating"))(page);
+        },
+    },
+    {
+        name: "tv-movie-menu",
+        viewport: "tv",
+        visit: async (page, ids) => {
+            await openTv(details(ids.movie, ids))(page);
+            await click(detailButton("btnMoreCommands"))(page);
+        },
+    },
+    {
+        name: "tv-series",
+        viewport: "tv",
+        visit: (page, ids) => openTv(details(ids.series, ids))(page),
+    },
+    {
+        name: "tv-person",
+        viewport: "tv",
+        visit: (page, ids) => openTv(details(ids.person, ids))(page),
+    },
+    {
+        name: "tv-album",
+        viewport: "tv",
+        visit: (page, ids) => openTv(details(ids.album, ids))(page),
+    },
+    { name: "tv-search", viewport: "tv", visit: openTv("#/search?query=the") },
+    {
+        name: "tv-live-tv-guide",
+        viewport: "tv",
+        visit: (page, ids) =>
+            openTv(`#/livetv?collectionType=livetv&tab=1&serverId=${ids.server}`)(page),
+    },
+    { name: "tv-settings", viewport: "tv", visit: openTv("#/mypreferencesmenu") },
 ];

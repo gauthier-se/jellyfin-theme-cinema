@@ -36,6 +36,9 @@ const VIEWPORTS = {
             "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 " +
             "(KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1",
     },
+    // Jellyfin picks the TV layout from the device; this is the setting that
+    // forces it.
+    tv: { viewport: { width: 1920, height: 1080 }, layout: "tv" },
 };
 
 const credentials = await loadCredentials();
@@ -64,7 +67,7 @@ async function signIn(page) {
 }
 
 let failures = 0;
-for (const [viewport, options] of Object.entries(VIEWPORTS)) {
+for (const [viewport, { layout, ...options }] of Object.entries(VIEWPORTS)) {
     for (const anonymous of [false, true]) {
         const todo = screens.filter(
             (s) => s.viewport === viewport && !!s.anonymous === anonymous && only.test(s.name),
@@ -84,11 +87,16 @@ for (const [viewport, options] of Object.entries(VIEWPORTS)) {
         });
         const page = await context.newPage();
         if (!anonymous) await signIn(page);
+        if (layout) {
+            await page.evaluate((name) => localStorage.setItem("layout", name), layout);
+            await page.reload();
+        }
 
         for (const screen of todo) {
             try {
                 // A menu left open by the previous screen would catch clicks.
-                await page.keyboard.press("Escape");
+                // In the TV layout Escape goes back a page: its screens reload.
+                if (!layout) await page.keyboard.press("Escape");
                 await screen.visit(page, ids);
                 await page.screenshot({
                     path: join(outDir, `${screen.name}.${extension}`),

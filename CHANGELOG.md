@@ -8,6 +8,19 @@ a patch for fixes.
 
 ## [Unreleased]
 
+### Added
+
+- The TV layout, what the web client shows on a television: a top bar with no slab and tabs as
+  pills, white focus on tabs and buttons, a ring on focused cards and home tiles, and the theme's
+  poster and title on item pages.
+
+### Fixed
+
+- TV layout: the focus ring of the top bar's tabs was cropped to two vertical lines.
+- TV layout: item pages showed their artwork only in a band behind the top bar. It fills the page
+  again, under a veil.
+- TV layout: the focused Play button covered its neighbour.
+
 ## [0.3.1] - 2026-10-21
 
 ### Changed
