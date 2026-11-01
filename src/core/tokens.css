@@ -114,7 +114,7 @@
 
 /* TV: a larger poster, seen from across the room */
 :root.layout-tv {
-    --cn-detail-poster: clamp(13rem, 18vw, 22rem);
+    --cn-detail-poster: 18vw;
 }
 
 /* Tablets and narrow windows: fewer, larger home tiles */

@@ -37,8 +37,15 @@ const VIEWPORTS = {
             "(KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1",
     },
     // Jellyfin picks the TV layout from the device; this is the setting that
-    // forces it.
-    tv: { viewport: { width: 1920, height: 1080 }, layout: "tv" },
+    // forces it. The user agent is a webOS TV's: it turns Jellyfin's card
+    // animations off, as on a real TV, which draws focus differently.
+    tv: {
+        viewport: { width: 1920, height: 1080 },
+        layout: "tv",
+        userAgent:
+            "Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) " +
+            "Chrome/120.0.0.0 Safari/537.36 WebAppManager",
+    },
 };
 
 const credentials = await loadCredentials();

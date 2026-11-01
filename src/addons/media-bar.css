@@ -6,7 +6,8 @@
  *
  * Desktop and mobile layouts only; TV keeps the plugin's full-bleed stage.
  * Every selector starts at html:not(.layout-tv) #slides-container, which
- * outranks the plugin's own rules without !important.
+ * outranks the plugin's own rules without !important. The one TV rule, at
+ * the end, is for engines the plugin cannot run on.
  */
 
 :root {
@@ -351,5 +352,17 @@ html:not(.layout-tv) #slides-container {
                 rgb(0 0 0 / 0%) 70%
             );
         }
+    }
+}
+
+/*
+ * The plugin's script uses optional chaining, a syntax error under Chromium
+ * 80 (webOS 6 and older), so the hero never comes. Its stylesheet loads all
+ * the same and holds the rows 65vh down an empty page. color-scheme arrived
+ * in Chromium 81, and no webOS release sits between the two.
+ */
+@supports not (color-scheme: dark) {
+    html.layout-tv .homeSectionsContainer {
+        margin-top: 0;
     }
 }

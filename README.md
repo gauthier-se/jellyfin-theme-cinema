@@ -39,6 +39,8 @@ The URL names a release, so the theme only changes when you change it. Release n
   The legacy desktop and mobile layouts are not styled.
 - **A recent browser**: Chrome or Edge 105, Firefox 121, Safari 16 or later. The theme relies on
   `:has()` and container queries; its nesting is compiled away at build time.
+- **Older TVs** hold up down to Chromium 79 (webOS 6), with less: My Media keeps Jellyfin's pictures
+  instead of the tiles, and Media Bar's script cannot run on engines under Chromium 80.
 - Native apps that render their own interface (Swiftfin, Android TV, Findroid) ignore Custom CSS.
   Browsers, Jellyfin Media Player and the Android app load it.
 

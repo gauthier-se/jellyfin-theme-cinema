@@ -44,7 +44,7 @@
         color: var(--cn-text);
     }
 
-    :is(.layout-desktop, .layout-tv) & h1.itemName {
+    .layout-desktop & h1.itemName {
         font-size: 2.3rem;
     }
 
@@ -153,26 +153,20 @@ html:not(.transparentDocument, .layout-tv):has(.itemDetailPage:not(.hide))
 }
 
 /*
- * Desktop and TV poster: Jellyfin gives it a quarter of the screen and
- * indents the title and text past it. A smaller poster, and the indent
- * follows it: the page gutter the poster sits in, its width, then a gap.
+ * Desktop poster: Jellyfin gives it a quarter of the screen and indents the
+ * title and text past it. A smaller poster, and the indent follows it: the
+ * page gutter the poster sits in, its width, then a gap.
  */
-:is(.layout-desktop, .layout-tv) .detailImageContainer .card {
+.layout-desktop .detailImageContainer .card {
     width: var(--cn-detail-poster);
     max-width: none;
 }
 
-:is(.layout-desktop, .layout-tv)
-    [dir="ltr"]
-    .itemDetailPage
-    :is(.detailRibbon, .detailPagePrimaryContent) {
+.layout-desktop [dir="ltr"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
     padding-left: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 
-:is(.layout-desktop, .layout-tv)
-    [dir="rtl"]
-    .itemDetailPage
-    :is(.detailRibbon, .detailPagePrimaryContent) {
+.layout-desktop [dir="rtl"] .itemDetailPage :is(.detailRibbon, .detailPagePrimaryContent) {
     padding-right: calc(var(--cn-gutter) + var(--cn-detail-poster) + 3rem);
 }
 

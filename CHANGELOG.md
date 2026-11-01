@@ -8,6 +8,16 @@ a patch for fixes.
 
 ## [Unreleased]
 
+### Fixed
+
+- TV layout: focused cards showed two rings on real TVs, Jellyfin's border and the theme's. The
+  same border made home tiles narrower than the Live TV shortcuts.
+- Older TVs, checked on Chromium 79 (webOS 6): the top bar lost its height and cropped its icons,
+  the Live TV shortcuts stacked across the page, and focused buttons had no ring and touched their
+  neighbours. Item pages keep the theme's poster there, and cards without artwork its grey. My
+  Media keeps Jellyfin's pictures, since the tiles need `:has()`.
+- Media Bar: on TVs that cannot run its script, the home page no longer opens on an empty space.
+
 ## [0.4.0] - 2026-11-01
 
 ### Added
