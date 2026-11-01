@@ -8,6 +8,8 @@ a patch for fixes.
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-11-01
+
 ### Fixed
 
 - TV layout: focused cards showed two rings on real TVs, Jellyfin's border and the theme's. The
@@ -125,7 +127,8 @@ First release, for Jellyfin 12.1 and its modern layout.
 - Customisation through `--cn-*` variables.
 - Add-ons for Media Bar 3.0, Jellyfin Enhanced 12.x and Cinematheque 0.3.
 
-[Unreleased]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.2.0...v0.3.0
