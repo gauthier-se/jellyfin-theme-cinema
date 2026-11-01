@@ -8,6 +8,8 @@ a patch for fixes.
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-11-01
+
 ### Fixed
 
 - TV layout: a focused link on item pages (people, genres, studios) was a blank white box, as
@@ -136,7 +138,8 @@ First release, for Jellyfin 12.1 and its modern layout.
 - Customisation through `--cn-*` variables.
 - Add-ons for Media Bar 3.0, Jellyfin Enhanced 12.x and Cinematheque 0.3.
 
-[Unreleased]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/gauthier-se/jellyfin-theme-cinema/compare/v0.3.0...v0.3.1
